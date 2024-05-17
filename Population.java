@@ -22,7 +22,8 @@ public class Population {
 
     private void handleEpidemic() {
         // Sort individuals by comfort and keep the best ones
-        individuals.sort(Comparator.comparingInt(Allocation::getMaxTime));
+        // Comparator is a interface in JAVA
+        individuals.sort(Comparator.comparingInt(Allocation::getMaxTime)); // Sort individuals in ascending order of maxTime
         List<Allocation> survivors = individuals.subList(0, 5);
         individuals = new ArrayList<>(survivors);
         // Allow other individuals to survive based on their comfort
