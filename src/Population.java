@@ -1,3 +1,4 @@
+package src;
 import java.util.*;
 
 public class Population {
@@ -28,6 +29,12 @@ public class Population {
         individuals = new ArrayList<>(survivors);
         // Allow other individuals to survive based on their comfort
         for (int i = 5; i < individuals.size(); i++) {
+            //Math.random() returns a random number between 0.0 and 1.0
+            // 1 - comfortThreshold is the probability of an individual not surviving
+            // Math.log(1 - comfortThreshold) is the probability of an individual not surviving in logarithmic scale
+            // 2/3 * (1 - Math.log(1 - comfortThreshold)) is the probability of an individual surviving in logarithmic scale
+            // Why Logarithmic Scale: By applying Math.log(1 - comfortThreshold), the transformation allows for finer control over the probability curve, making survival rates more sensitive to changes in comfort at different levels of comfort.
+            // Adjusting with 2.0 / 3: This scales the result to fit the desired range for probabilities. Without this factor, the survival rates might be too high or too low.
             if (Math.random() < 2.0 / 3 * (1 - Math.log(1 - comfortThreshold))) {
                 survivors.add(individuals.get(i));
             }

@@ -1,3 +1,4 @@
+package src;
 public class PlanetarySystem {
     private int id;
     private int[] patrolTimes; // Time required by each patrol to pacify this system

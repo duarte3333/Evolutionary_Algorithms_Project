@@ -1,20 +1,22 @@
+package src;
+
 import java.util.*;
 
-public class EvolutionaryAlgorithm {
+public class Main {
     private Population population;
     private List<Patrol> patrols;
     private List<PlanetarySystem> systems;
     private int maxGenerations;
     private int maxTime;
-    private double comfortThreshold; // Define comfortThreshold
+    private double comfortThreshold;
 
-    public EvolutionaryAlgorithm(List<Patrol> patrols, List<PlanetarySystem> systems, int maxGenerations, int maxTime, double comfortThreshold) {
+    public Main(List<Patrol> patrols, List<PlanetarySystem> systems, int maxGenerations, int maxTime, double comfortThreshold) {
         this.patrols = patrols;
         this.systems = systems;
         this.maxGenerations = maxGenerations;
         this.maxTime = maxTime;
-        this.comfortThreshold = comfortThreshold; // Initialize comfortThreshold
-        population = new Population(100, comfortThreshold); // Pass comfortThreshold to Population
+        this.comfortThreshold = comfortThreshold;
+        population = new Population(100, comfortThreshold);
     }
 
     public void run() {
@@ -45,10 +47,8 @@ public class EvolutionaryAlgorithm {
     private void evolvePopulation() {
         List<Allocation> newIndividuals = new ArrayList<>();
         for (Allocation individual : population.getIndividuals()) {
-            // Apply mutations
             Allocation mutated = mutateIndividual(individual);
             newIndividuals.add(mutated);
-            // Apply reproduction
             Allocation reproduced = reproduceIndividual(individual);
             newIndividuals.add(reproduced);
         }
@@ -58,7 +58,6 @@ public class EvolutionaryAlgorithm {
     }
 
     private Allocation mutateIndividual(Allocation individual) {
-        // Mutate the allocation
         Map<Patrol, List<PlanetarySystem>> allocation = new HashMap<>(individual.getAllocation());
         Patrol randomPatrol = patrols.get(new Random().nextInt(patrols.size()));
         List<PlanetarySystem> systems = allocation.get(randomPatrol);
@@ -71,7 +70,6 @@ public class EvolutionaryAlgorithm {
     }
 
     private Allocation reproduceIndividual(Allocation individual) {
-        // Reproduce the allocation
         Map<Patrol, List<PlanetarySystem>> allocation = new HashMap<>(individual.getAllocation());
         int numberOfSystemsToRemove = (int) Math.floor((1 - (1 - Math.log(1 - comfortThreshold))) * systems.size());
         for (int i = 0; i < numberOfSystemsToRemove; i++) {
@@ -93,18 +91,33 @@ public class EvolutionaryAlgorithm {
             System.out.println("Patrol " + entry.getKey().getId() + ": " + entry.getValue().stream().map(PlanetarySystem::getId).toList());
         }
     }
-
+    //java -jar project.jar -r      n m   τ  ν νmax μ ρ δ
+    //java -jar MyJarProject.jar -r 3 6 1000 4 0.1 1 1 1
     public static void main(String[] args) {
-        List<Patrol> patrols = List.of(new Patrol(0), new Patrol(1), new Patrol(2));
-        List<PlanetarySystem> systems = List.of(
-            new PlanetarySystem(0, new int[]{1, 2, 3}),
-            new PlanetarySystem(1, new int[]{2, 2, 3}),
-            new PlanetarySystem(2, new int[]{1, 2, 3}),
-            new PlanetarySystem(3, new int[]{1, 2, 3}),
-            new PlanetarySystem(4, new int[]{2, 2, 3}),
-            new PlanetarySystem(5, new int[]{1, 2, 3})
-        );
-        EvolutionaryAlgorithm algorithm = new EvolutionaryAlgorithm(patrols, systems, 1000, 4, 0.1);
+        Parser parser = new Parser(args);
+
+        System.out.println("n: " + parser.getN());
+        // List of patrols
+        int[][] sintetic_C = new int[][]{
+            {1, 2, 3},
+            {2, 2, 3},
+            {1, 2, 3},
+            {1, 2, 3},
+            {2, 2, 3},
+            {1, 2, 3}
+        };
+
+        List<Patrol> patrols = new ArrayList<>(parser.getN());
+        for (int i = 0; i < parser.getN(); i++) {
+            patrols.add(new Patrol(i));
+        }
+
+        List<PlanetarySystem> systems = new ArrayList<>(parser.getM());
+        for (int i = 0; i < parser.getM(); i++) {
+            systems.add(new PlanetarySystem(i, sintetic_C[i % sintetic_C.length]));
+        }
+
+        Main algorithm = new Main(patrols, systems, 1000, 4, 0.1);
         algorithm.run();
     }
 }
