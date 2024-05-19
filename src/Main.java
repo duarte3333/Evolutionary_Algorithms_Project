@@ -6,32 +6,28 @@ public class Main {
     private Population population;
     private List<Patrol> patrols;
     private List<PlanetarySystem> systems;
-    private int maxGenerations;
-    private int maxTime;
+    private int tau;
     private double comfortThreshold;
+    private int inicial_population;
 
-    public Main(List<Patrol> patrols, List<PlanetarySystem> systems, int maxGenerations, int maxTime, double comfortThreshold) {
+
+    public Main(List<Patrol> patrols, List<PlanetarySystem> systems, 
+        int tau, double comfortThreshold, 
+        int inicial_population, int max_population) {
         this.patrols = patrols;
         this.systems = systems;
-        this.maxGenerations = maxGenerations;
-        this.maxTime = maxTime;
+        this.tau = tau;
         this.comfortThreshold = comfortThreshold;
-        population = new Population(100, comfortThreshold);
+        population = new Population(max_population, comfortThreshold);
     }
 
     public void run() {
         generateInitialPopulation();
-        for (int i = 0; i < maxGenerations; i++) {
-            evolvePopulation();
-            if (population.getBestIndividual().getMaxTime() <= maxTime) {
-                break;
-            }
-        }
-        displayBestSolution();
+
     }
 
     private void generateInitialPopulation() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < this.inicial_population; i++) {
             Map<Patrol, List<PlanetarySystem>> allocation = new HashMap<>();
             for (Patrol patrol : patrols) {
                 allocation.put(patrol, new ArrayList<>());
@@ -40,61 +36,26 @@ public class Main {
                 Patrol randomPatrol = patrols.get(new Random().nextInt(patrols.size()));
                 allocation.get(randomPatrol).add(system);
             }
-            population.addIndividual(new Allocation(allocation));
+            population.addIndividual(new Individual(allocation));
         }
     }
 
-    private void evolvePopulation() {
-        List<Allocation> newIndividuals = new ArrayList<>();
-        for (Allocation individual : population.getIndividuals()) {
-            Allocation mutated = mutateIndividual(individual);
-            newIndividuals.add(mutated);
-            Allocation reproduced = reproduceIndividual(individual);
-            newIndividuals.add(reproduced);
-        }
-        for (Allocation newIndividual : newIndividuals) {
-            population.addIndividual(newIndividual);
-        }
-    }
 
-    private Allocation mutateIndividual(Allocation individual) {
-        Map<Patrol, List<PlanetarySystem>> allocation = new HashMap<>(individual.getAllocation());
-        Patrol randomPatrol = patrols.get(new Random().nextInt(patrols.size()));
-        List<PlanetarySystem> systems = allocation.get(randomPatrol);
-        if (!systems.isEmpty()) {
-            PlanetarySystem system = systems.remove(new Random().nextInt(systems.size()));
-            Patrol newPatrol = patrols.get(new Random().nextInt(patrols.size()));
-            allocation.get(newPatrol).add(system);
-        }
-        return new Allocation(allocation);
-    }
+    
 
-    private Allocation reproduceIndividual(Allocation individual) {
-        Map<Patrol, List<PlanetarySystem>> allocation = new HashMap<>(individual.getAllocation());
-        int numberOfSystemsToRemove = (int) Math.floor((1 - (1 - Math.log(1 - comfortThreshold))) * systems.size());
-        for (int i = 0; i < numberOfSystemsToRemove; i++) {
-            Patrol randomPatrol = patrols.get(new Random().nextInt(patrols.size()));
-            List<PlanetarySystem> systems = allocation.get(randomPatrol);
-            if (!systems.isEmpty()) {
-                PlanetarySystem system = systems.remove(new Random().nextInt(systems.size()));
-                Patrol newPatrol = patrols.get(new Random().nextInt(patrols.size()));
-                allocation.get(newPatrol).add(system);
-            }
-        }
-        return new Allocation(allocation);
-    }
-
-    private void displayBestSolution() {
-        Allocation best = population.getBestIndividual();
-        System.out.println("Best allocation with max time: " + best.getMaxTime());
-        for (Map.Entry<Patrol, List<PlanetarySystem>> entry : best.getAllocation().entrySet()) {
-            System.out.println("Patrol " + entry.getKey().getId() + ": " + entry.getValue().stream().map(PlanetarySystem::getId).toList());
-        }
-    }
-    //java -jar project.jar -r      n m   τ  ν νmax μ ρ δ
-    //java -jar MyJarProject.jar -r 3 6 1000 4 0.1 1 1 1
+    //java -jar project.jar      -r     n m  τ    ν νmax μ ρ δ
+    //java -jar MyJarProject.jar -r     3 6  1000 4 0.1  1 1 1
     public static void main(String[] args) {
         Parser parser = new Parser(args);
+
+        int n = parser.getN(); // Number of patrols
+        int m = parser.getM(); // Number of systems
+        int tau = parser.getTau(); // Final instant of evolution (> 0);
+        int nu = parser.getNu(); // Initial population
+        int nuMax = parser.getNuMax(); // Maximum population
+        double mu = parser.getMu(); // Mutation rate
+        double rho = parser.getRho(); // Reproduction rate
+        double delta = parser.getDelta(); // Comfort threshold
 
         System.out.println("n: " + parser.getN());
         // List of patrols
@@ -107,17 +68,17 @@ public class Main {
             {1, 2, 3}
         };
 
-        List<Patrol> patrols = new ArrayList<>(parser.getN());
+        List<Patrol> patrols = new ArrayList<>(n);
         for (int i = 0; i < parser.getN(); i++) {
             patrols.add(new Patrol(i));
         }
 
-        List<PlanetarySystem> systems = new ArrayList<>(parser.getM());
-        for (int i = 0; i < parser.getM(); i++) {
+        List<PlanetarySystem> systems = new ArrayList<>(m);
+        for (int i = 0; i < m; i++) {
             systems.add(new PlanetarySystem(i, sintetic_C[i % sintetic_C.length]));
         }
 
-        Main algorithm = new Main(patrols, systems, 1000, 4, 0.1);
+        Main algorithm = new Main(patrols, systems, tau, delta, nu, nuMax) ;
         algorithm.run();
     }
 }

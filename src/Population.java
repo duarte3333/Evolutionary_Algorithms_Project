@@ -2,7 +2,7 @@ package src;
 import java.util.*;
 
 public class Population {
-    private List<Allocation> individuals;
+    private List<Individual> individuals;
     private int maxIndividuals;
     private double comfortThreshold;
 
@@ -12,7 +12,7 @@ public class Population {
         individuals = new ArrayList<>();
     }
 
-    public void addIndividual(Allocation allocation) {
+    public void addIndividual(Individual allocation) {
         if (individuals.size() < maxIndividuals) {
             individuals.add(allocation);
         } else {
@@ -24,8 +24,8 @@ public class Population {
     private void handleEpidemic() {
         // Sort individuals by comfort and keep the best ones
         // Comparator is a interface in JAVA
-        individuals.sort(Comparator.comparingInt(Allocation::getMaxTime)); // Sort individuals in ascending order of maxTime
-        List<Allocation> survivors = individuals.subList(0, 5);
+        individuals.sort(Comparator.comparingInt(Individual::getMaxTime)); // Sort individuals in ascending order of maxTime
+        List<Individual> survivors = individuals.subList(0, 5);
         individuals = new ArrayList<>(survivors);
         // Allow other individuals to survive based on their comfort
         for (int i = 5; i < individuals.size(); i++) {
@@ -35,18 +35,18 @@ public class Population {
             // 2/3 * (1 - Math.log(1 - comfortThreshold)) is the probability of an individual surviving in logarithmic scale
             // Why Logarithmic Scale: By applying Math.log(1 - comfortThreshold), the transformation allows for finer control over the probability curve, making survival rates more sensitive to changes in comfort at different levels of comfort.
             // Adjusting with 2.0 / 3: This scales the result to fit the desired range for probabilities. Without this factor, the survival rates might be too high or too low.
-            if (Math.random() < 2.0 / 3 * (1 - Math.log(1 - comfortThreshold))) {
+            if (Math.random() < (2.0 / 3 * (1 - Math.log(1 - comfortThreshold)))) {
                 survivors.add(individuals.get(i));
             }
         }
         individuals = survivors;
     }
 
-    public List<Allocation> getIndividuals() {
+    public List<Individual> getIndividuals() {
         return individuals;
     }
 
-    public Allocation getBestIndividual() {
-        return individuals.stream().min(Comparator.comparingInt(Allocation::getMaxTime)).orElse(null);
+    public Individual getBestIndividual() {
+        return individuals.stream().min(Comparator.comparingInt(Individual::getMaxTime)).orElse(null);
     }
 }

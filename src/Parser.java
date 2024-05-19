@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Parser {
-    private int n, m, v, vmax;
-    private double tau, mu, rho, delta;
+    private int n, m, v, vmax, tau;
+    private double mu, rho, delta;
     private int[][] C;
 
     public Parser(String[] args) {
@@ -23,7 +23,7 @@ public class Parser {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             n = scanner.nextInt();
             m = scanner.nextInt();
-            tau = scanner.nextDouble();
+            tau = scanner.nextInt();
             v = scanner.nextInt();
             vmax = scanner.nextInt();
             mu = scanner.nextDouble();
@@ -43,7 +43,7 @@ public class Parser {
     private void readFromCommandLine(String[] args) {
         n = Integer.parseInt(args[1]);
         m = Integer.parseInt(args[2]);
-        tau = Double.parseDouble(args[3]);
+        tau = Integer.parseInt(args[3]);
         v = Integer.parseInt(args[4]);
         vmax = Integer.parseInt(args[5]);
         mu = Double.parseDouble(args[6]);
@@ -70,15 +70,15 @@ public class Parser {
         return m;
     }
 
-    public double getTau() {
+    public int getTau() {
         return tau;
     }
 
-    public int getV() {
+    public int getNu() {
         return v;
     }
 
-    public int getVmax() {
+    public int getNuMax() {
         return vmax;
     }
 
