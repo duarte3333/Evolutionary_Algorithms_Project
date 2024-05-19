@@ -39,11 +39,15 @@ public class Individual {
         return tmin / tz;
     }
 
-    public double getComfort() {
-        return comfort;
-    }
-
     public Map<Patrol, List<PlanetarySystem>> getAllocation() {
         return allocation;
+    }
+    
+    public void setAllocation(Map<Patrol, List<PlanetarySystem>> allocation) {
+        this.allocation = allocation;
+    }
+
+    public double getComfort() {
+        return comfort;
     }
 }

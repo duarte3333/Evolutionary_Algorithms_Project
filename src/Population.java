@@ -1,41 +1,36 @@
 package src;
 import java.util.*;
 
-public class Population {
+class Population {
     private List<Individual> individuals;
-    private int maxIndividuals;
+    private int maxPopulation;
     private double comfortThreshold;
 
-    public Population(int maxIndividuals, double comfortThreshold) {
-        this.maxIndividuals = maxIndividuals;
+    public Population(int _maxPopulation, double comfortThreshold) {
+        this.individuals = new ArrayList<>();
+        this.maxPopulation = _maxPopulation;
         this.comfortThreshold = comfortThreshold;
-        individuals = new ArrayList<>();
     }
 
-    public void addIndividual(Individual allocation) {
-        if (individuals.size() < maxIndividuals) {
-            individuals.add(allocation);
+    public void addIndividual(Individual individual) {
+        if (individuals.size() < maxPopulation) {
+            individuals.add(individual);
         } else {
             // Handle overpopulation and epidemics
             handleEpidemic();
         }
     }
 
-    private void handleEpidemic() {
+    public void handleEpidemic() {
         // Sort individuals by comfort and keep the best ones
         // Comparator is a interface in JAVA
-        individuals.sort(Comparator.comparingInt(Individual::getMaxTime)); // Sort individuals in ascending order of maxTime
+        individuals.sort(Comparator.comparingDouble(Individual::getComfort)); // Sort individuals in ascending order of comfort
         List<Individual> survivors = individuals.subList(0, 5);
         individuals = new ArrayList<>(survivors);
         // Allow other individuals to survive based on their comfort
         for (int i = 5; i < individuals.size(); i++) {
             //Math.random() returns a random number between 0.0 and 1.0
-            // 1 - comfortThreshold is the probability of an individual not surviving
-            // Math.log(1 - comfortThreshold) is the probability of an individual not surviving in logarithmic scale
-            // 2/3 * (1 - Math.log(1 - comfortThreshold)) is the probability of an individual surviving in logarithmic scale
-            // Why Logarithmic Scale: By applying Math.log(1 - comfortThreshold), the transformation allows for finer control over the probability curve, making survival rates more sensitive to changes in comfort at different levels of comfort.
-            // Adjusting with 2.0 / 3: This scales the result to fit the desired range for probabilities. Without this factor, the survival rates might be too high or too low.
-            if (Math.random() < (2.0 / 3 * (1 - Math.log(1 - comfortThreshold)))) {
+            if (Math.random() < ((2.0 / 3) * individuals.get(i).getComfort())) {
                 survivors.add(individuals.get(i));
             }
         }
@@ -46,7 +41,16 @@ public class Population {
         return individuals;
     }
 
+ 
     public Individual getBestIndividual() {
-        return individuals.stream().min(Comparator.comparingInt(Individual::getMaxTime)).orElse(null);
+        // a stream is a sequence of elements supporting sequential and parallel aggregate operations
+        // orElse() returns the value if present, otherwise returns the default value
+        return individuals.stream()
+                          .max(Comparator.comparingDouble(Individual::getComfort))
+                          .orElse(null);
+    }
+
+    public int getMaxPopulation() {
+        return maxPopulation;
     }
 }

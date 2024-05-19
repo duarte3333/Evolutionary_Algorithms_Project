@@ -15,4 +15,10 @@ public class PlanetarySystem {
     public int getTimeForPatrol(int patrolId) {
         return patrolTimes[patrolId];
     }
+    
+    @Override
+    public String toString() {
+        return "System " + id;
+    }
+
 }

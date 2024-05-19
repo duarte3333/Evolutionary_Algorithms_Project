@@ -29,6 +29,6 @@ clean:
 
 run:
 	@echo "Running the JAR file..."
-	java -jar $(JAR_FILE) -r 3 6 1000 1 1 1 1 0.1
+	java -jar $(JAR_FILE) -r 3 6 10 10 100 10 1 1
 # Phony targets
 .PHONY: all clean
