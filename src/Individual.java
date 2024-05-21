@@ -11,10 +11,30 @@ public class Individual {
     //patrol3 -> [system7, system8, system9]
     private Map<Patrol, List<PlanetarySystem>> allocation;
     private double comfort;
+    private double time;
+    private Event event;
+    private boolean action;
 
     public Individual(Map<Patrol, List<PlanetarySystem>> allocation) {
         this.allocation = allocation;
         this.comfort = calculateComfort();
+        this.action = false;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public double getTime() {
+        return time;
     }
 
     private double calculateComfort() {

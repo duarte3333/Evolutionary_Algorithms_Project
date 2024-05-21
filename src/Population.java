@@ -4,12 +4,10 @@ import java.util.*;
 class Population {
     private List<Individual> individuals;
     private int maxPopulation;
-    private double comfortThreshold;
 
     public Population(int _maxPopulation, double comfortThreshold) {
         this.individuals = new ArrayList<>();
         this.maxPopulation = _maxPopulation;
-        this.comfortThreshold = comfortThreshold;
     }
 
     public void addIndividual(Individual individual) {
