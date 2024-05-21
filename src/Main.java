@@ -57,11 +57,11 @@ public class Main {
             individual.setEvent(new Event(2));
 
         }
-        if (reproductionRate < deathRate && reproductionRate < mutationRate) {
+        else if (reproductionRate < deathRate && reproductionRate < mutationRate) {
             individual.setEvent(new Event(1));
 
         }
-        if (deathRate < mutationRate && deathRate < reproductionRate) {
+        else if (deathRate < mutationRate && deathRate < reproductionRate) {
             individual.setEvent(new Event(0));
         }
         double nextEventTime = Math.min(Tdeath, Math.min(Tmutation, Treproduction));
@@ -92,7 +92,7 @@ public class Main {
         
         if (!systemsRandomPatrol.isEmpty()) {
             // Select a random system from the chosen patrol
-            PlanetarySystem system = systemsRandomPatrol.remove(random.nextInt(systems.size()));
+            PlanetarySystem system = systemsRandomPatrol.remove(random.nextInt(systems.size())); // N deveria ser o size dos systemes deste patrol
             
             // Select a new patrol to move the system to
             int newPatrolIndex = random.nextInt(patrols.size());
@@ -102,7 +102,7 @@ public class Main {
             Patrol newPatrol = patrols.get(newPatrolIndex);
             individual.getAllocation().get(newPatrol).add(system);
         }
-        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, 0.1, individual);
+        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, 0.1, individual); // coffDeath n devia ser um input?
         individual.setTime(nextEventTime);
     }
 
@@ -110,15 +110,17 @@ public class Main {
         Map<Patrol, List<PlanetarySystem>> new_allocation = new HashMap<>(individual.getAllocation());
         int numberOfSystemsToRemove = (int)Math.round((1 - individual.getComfort()))*(systems.size());
         
+        // Select systems to remove
         List<Integer> systems_to_remove = new ArrayList<>();
         for (int i = 0; i < numberOfSystemsToRemove; i++) {
             int value = random.nextInt(this.systems.size());
-            while (systems_to_remove.contains(value)) {
+            while (systems_to_remove.contains(value)) { // systems_to_remove.contains(this.systems.get(value))
                 value = random.nextInt(this.systems.size());
             }
             systems_to_remove.add(value);
         }
         
+        // Remove Systems from the Patrols
         for (Patrol patrol : new_allocation.keySet()) {
             List<PlanetarySystem> systems = new_allocation.get(patrol);
             for (int i = 0; i < systems_to_remove.size(); i++) {
@@ -128,14 +130,15 @@ public class Main {
             }
         }
 
+        // Add removed systems to new patrols
         for (int i = 0; i < numberOfSystemsToRemove; i++) {
             // Select a random patrol
             Patrol randomPatrol = patrols.get(random.nextInt(patrols.size()));
             List<PlanetarySystem> systems = individual.getAllocation().get(randomPatrol);
-            systems.add(null)
+            systems.add(null) // ???
             if (!systems.isEmpty()) {
                 // Select a random system from the chosen patrol
-                PlanetarySystem system = systems.remove(random.nextInt(systems.size()));
+                PlanetarySystem system = systems.remove(random.nextInt(systems.size())); // Não percebi pq estamos a remover um planeta do system
                 
                 // Select a new patrol to move the system to
                 Patrol newPatrol = patrols.get(random.nextInt(patrols.size()));
@@ -156,17 +159,22 @@ public class Main {
         int epidemics = 0;
         double currentTime = 0;
 
-        int observationInterval = Math.max(1, tau / 20);
+        int observationInterval = Math.max(1, tau / 20); // n percebo a cena do a: 
         for (Individual individual : population.getIndividuals()) {
             double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, 0.1, individual);
             individual.setTime(nextEventTime);
         }
        
-        while (currentTime < tau && !population.getIndividuals().isEmpty()) {
+        while (currentTime < tau && !population.getIndividuals().isEmpty()) { // Tbm deviamos ver no loop se o confort do melhor individuo é 1
 
             List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
             //sort individuals by time
             individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+
+            // N deviamos 1o atualizar o current time e só depos checkar a condição?
+            // currentTime = performEvent(individualsByTime.get(0));
+            // events++;
+            // if (currentTime > tau) break;
 
             if (currentTime > tau) break;
             currentTime = performEvent(individualsByTime.get(0));
@@ -184,7 +192,7 @@ public class Main {
         outputFinalObservation(currentTime, events, epidemics);
     }
 
-    private Individual selectIndividual() {
+    private Individual selectIndividual() { 
         return population.getIndividuals().get(random.nextInt(population.getIndividuals().size()));
     }
 
@@ -210,7 +218,7 @@ public class Main {
     }
     
     private void outputFinalObservation(double time, int events, int epidemics) {
-        Individual bestIndividual = population.getBestIndividual();
+        Individual bestIndividual = population.getBestIndividual(); //Temos de dar store ao melhor ao individuo da simulação inteira e n só do melhor no ultimo instante
         System.out.println("Final instant: " + time);
         System.out.println("Total events: " + events);
         System.out.println("Final population size: " + population.getIndividuals().size());

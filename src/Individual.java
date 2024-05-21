@@ -39,6 +39,8 @@ public class Individual {
 
     private double calculateComfort() {
         //Calculate t_min which is the time that the patrol with the least time takes to complete its route
+
+        // Mudar o tmin para uma costante que calculamos logo, em vez de estarmos a recalcular cada vez que calculamos o conforto
         double tmin = 0;
         for (PlanetarySystem system : allocation.values().iterator().next()) {
             int minTime = Integer.MAX_VALUE;
