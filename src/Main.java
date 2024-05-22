@@ -8,21 +8,23 @@ public class Main {
     private List<PlanetarySystem> systems;
     private int tau;
     private int initialPopulation;
+    private double deathRate;
     private double mutationRate;
     private double reproductionRate;
+
     private Random random = new Random();
 
     public Main(List<Patrol> patrols, List<PlanetarySystem> systems, 
-                int tau, double comfortThreshold, 
-                int initialPopulation, int maxPopulation,
-                double mutationRate, double reproductionRate) {
+                int tau, int initialPopulation, int maxPopulation,
+                double deathRate, double mutationRate, double reproductionRate) {
         this.patrols = patrols;
         this.systems = systems;
         this.tau = tau;
         this.initialPopulation = initialPopulation;
+        this.deathRate = deathRate;
         this.mutationRate = mutationRate;
         this.reproductionRate = reproductionRate;
-        population = new Population(maxPopulation, comfortThreshold);
+        population = new Population(maxPopulation);
     }
 
     private void generateInitialPopulation() {
@@ -68,23 +70,23 @@ public class Main {
         return nextEventTime;
     }
 
-    public double performEvent(Individual individual) {
+    public double performEvent(Individual individual, double currentTime) {
         Event event = individual.getEvent();
         switch (event.getType()) {
             case DEATH:
                 death(individual);
                 break;
             case MUTATE:
-                mutate(individual);
+                mutate(individual, currentTime);
                 break;
             case REPRODUCE:
-                reproduce(individual);
+                reproduce(individual, currentTime);
                 break;
         }
         return individual.getTime();
     }
 
-    private void mutate(Individual individual) {
+    private void mutate(Individual individual, double currentTime) {
         // Select a random patrol
         int randomPatrolIndex = random.nextInt(patrols.size());
         Patrol randomPatrol = patrols.get(randomPatrolIndex);
@@ -102,51 +104,39 @@ public class Main {
             Patrol newPatrol = patrols.get(newPatrolIndex);
             individual.getAllocation().get(newPatrol).add(system);
         }
-        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, 0.1, individual); // coffDeath n devia ser um input?
-        individual.setTime(nextEventTime);
+        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual);
+        individual.setTime(nextEventTime + currentTime);
     }
 
-    private void reproduce(Individual individual) {
+    private void reproduce(Individual individual, double currentTime) {
         Map<Patrol, List<PlanetarySystem>> new_allocation = new HashMap<>(individual.getAllocation());
         int numberOfSystemsToRemove = (int)Math.round((1 - individual.getComfort()))*(systems.size());
         
-        // Select systems to remove
-        List<Integer> systems_to_remove = new ArrayList<>();
+        //Select random systems to remove
+        List<PlanetarySystem> systems_to_remove = new ArrayList<>();
         for (int i = 0; i < numberOfSystemsToRemove; i++) {
-            int value = random.nextInt(this.systems.size());
-            while (systems_to_remove.contains(value)) { // systems_to_remove.contains(this.systems.get(value))
-                value = random.nextInt(this.systems.size());
-            }
-            systems_to_remove.add(value);
+            systems_to_remove.add(systems.get(random.nextInt(systems.size())));
         }
         
-        // Remove Systems from the Patrols
+        //Remove the random systems from the new allocation
         for (Patrol patrol : new_allocation.keySet()) {
-            List<PlanetarySystem> systems = new_allocation.get(patrol);
-            for (int i = 0; i < systems_to_remove.size(); i++) {
-                if (systems.contains(systems.get(systems_to_remove.get(i).intValue()))) {
-                    systems.remove(systems_to_remove.get(i).intValue());
-                }
-            }
+            new_allocation.get(patrol).removeAll(systems_to_remove);
         }
 
-        // Add removed systems to new patrols
-        for (int i = 0; i < numberOfSystemsToRemove; i++) {
-            // Select a random patrol
+        //Assign in random order the removed systems to the patrols
+        for (PlanetarySystem system : systems_to_remove) {
             Patrol randomPatrol = patrols.get(random.nextInt(patrols.size()));
-            List<PlanetarySystem> systems = individual.getAllocation().get(randomPatrol);
-            systems.add(null) // ???
-            if (!systems.isEmpty()) {
-                // Select a random system from the chosen patrol
-                PlanetarySystem system = systems.remove(random.nextInt(systems.size())); // Não percebi pq estamos a remover um planeta do system
-                
-                // Select a new patrol to move the system to
-                Patrol newPatrol = patrols.get(random.nextInt(patrols.size()));
-                individual.getAllocation().get(newPatrol).add(system);
-            }
+            new_allocation.get(randomPatrol).add(system);
         }
-        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, 0.1, individual);
-        individual.setTime(nextEventTime);
+
+        Individual newIndividual = new Individual(new_allocation);
+        population.addIndividual(newIndividual);
+
+        double nextEventTimeNew = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, newIndividual);
+        newIndividual.setTime(nextEventTimeNew + currentTime);
+
+        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual);
+        individual.setTime(nextEventTime + currentTime);
     }
 
     private void death(Individual individual) {
@@ -161,7 +151,8 @@ public class Main {
 
         int observationInterval = Math.max(1, tau / 20); // n percebo a cena do a: 
         for (Individual individual : population.getIndividuals()) {
-            double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, 0.1, individual);
+            double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual);
+            System.out.println("time-- " + nextEventTime);
             individual.setTime(nextEventTime);
         }
        
@@ -177,7 +168,7 @@ public class Main {
             // if (currentTime > tau) break;
 
             if (currentTime > tau) break;
-            currentTime = performEvent(individualsByTime.get(0));
+            currentTime = performEvent(individualsByTime.get(0), currentTime);
             events++;
 
             if (population.getIndividuals().size() > population.getMaxPopulation()) {
@@ -192,10 +183,6 @@ public class Main {
         outputFinalObservation(currentTime, events, epidemics);
     }
 
-    private Individual selectIndividual() { 
-        return population.getIndividuals().get(random.nextInt(population.getIndividuals().size()));
-    }
-
     private void outputObservation(double time, int events, int epidemics) {
         Individual bestIndividual = population.getBestIndividual();
         System.out.println("Present instant: " + time);
@@ -207,14 +194,14 @@ public class Main {
         System.out.println("Comfort: " + bestIndividual.getComfort());
 
         // Output other candidate distributions if available
-        int numberOfCandidates = Math.min(5, population.getIndividuals().size());
-        for (int i = 1; i < numberOfCandidates; i++) {
-            Individual individual = population.getIndividuals().get(i);
-            System.out.println("Other candidate distribution " + i + ": " + formatAllocation(individual.getAllocation()));
-            System.out.println("Empire policing time: " + (1 / individual.getComfort()));
-            System.out.println("Comfort: " + individual.getComfort());
-        }
-        System.out.println();
+        // int numberOfCandidates = Math.min(5, population.getIndividuals().size());
+        // for (int i = 1; i < numberOfCandidates; i++) {
+        //     Individual individual = population.getIndividuals().get(i);
+        //     System.out.println("Other candidate distribution " + i + ": " + formatAllocation(individual.getAllocation()));
+        //     System.out.println("Empire policing time: " + (1 / individual.getComfort()));
+        //     System.out.println("Comfort: " + individual.getComfort());
+        // }
+        // System.out.println();
     }
     
     private void outputFinalObservation(double time, int events, int epidemics) {
@@ -279,7 +266,7 @@ public class Main {
             systems.add(new PlanetarySystem(i, sintetic_C[i % sintetic_C.length]));
         }
 
-        Main algorithm = new Main(patrols, systems, tau, delta, nu, nuMax, mu, rho);
+        Main algorithm = new Main(patrols, systems, tau, nu, nuMax, mu, rho, delta);
         algorithm.run();
     }
 }

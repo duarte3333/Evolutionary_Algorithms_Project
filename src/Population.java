@@ -5,7 +5,7 @@ class Population {
     private List<Individual> individuals;
     private int maxPopulation;
 
-    public Population(int _maxPopulation, double comfortThreshold) {
+    public Population(int _maxPopulation) {
         this.individuals = new ArrayList<>();
         this.maxPopulation = _maxPopulation;
     }
