@@ -51,21 +51,24 @@ public class Main {
         double nextMutationSample = random.nextDouble();
         double nextReproductionSample = random.nextDouble();
         
-        double Tdeath = deathRate * Math.log(1 - nextDeathSample);
-        double Tmutation = mutationRate * Math.log(1 - nextMutationSample);
-        double Treproduction = reproductionRate * Math.log(1 - nextReproductionSample);
+        double Tdeath = -deathRate * Math.log(1 - nextDeathSample);
+        double Tmutation = -mutationRate * Math.log(1 - nextMutationSample);
+        double Treproduction = -reproductionRate * Math.log(1 - nextReproductionSample);
         
-        if (mutationRate < deathRate && mutationRate < reproductionRate) {
-            individual.setEvent(new Event(2));
-
+        Event event = null;
+        if (Tmutation < Tdeath && Tmutation < Treproduction) {
+            event = new Event(2); // Mutation
+        } else if (Treproduction < Tdeath && Treproduction < Tmutation) {
+            event = new Event(1); // Reproduction
+        } else if (Tdeath < Tmutation && Tdeath < Treproduction) {
+            event = new Event(0); // Death
         }
-        else if (reproductionRate < deathRate && reproductionRate < mutationRate) {
-            individual.setEvent(new Event(1));
-
+    
+        if (event == null) {
+            throw new IllegalStateException("No event could be determined for individual with comfort " + individual.getComfort());
         }
-        else if (deathRate < mutationRate && deathRate < reproductionRate) {
-            individual.setEvent(new Event(0));
-        }
+    
+        individual.setEvent(event);
         double nextEventTime = Math.min(Tdeath, Math.min(Tmutation, Treproduction));
         return nextEventTime;
     }
@@ -93,8 +96,8 @@ public class Main {
         List<PlanetarySystem> systemsRandomPatrol = individual.getAllocation().get(randomPatrol);
         
         if (!systemsRandomPatrol.isEmpty()) {
-            // Select a random system from the chosen patrol
-            PlanetarySystem system = systemsRandomPatrol.remove(random.nextInt(systems.size())); // N deveria ser o size dos systemes deste patrol
+            // Remove a random system from the chosen random patrol
+            PlanetarySystem system = individual.getAllocation().get(randomPatrol).remove(random.nextInt(systemsRandomPatrol.size()));
             
             // Select a new patrol to move the system to
             int newPatrolIndex = random.nextInt(patrols.size());
