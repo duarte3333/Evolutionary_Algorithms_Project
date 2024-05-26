@@ -1,14 +1,16 @@
-package src;
+package src.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Parser {
+    private static Parser instance;
     private int n, m, v, vmax, tau;
     private double mu, rho, delta;
     private int[][] C;
 
-    public Parser(String[] args) {
+    private Parser(String[] args) {
+        //Private constructor to prevent instantiation
         if (args.length == 2 && args[0].equals("-f")) {
             readFromFile(args[1]);
         } else if (args.length == 9 && args[0].equals("-r")) {
@@ -17,6 +19,13 @@ public class Parser {
             System.err.println("Invalid arguments");
             return;
         }
+    }
+
+    public static Parser getInstance(String[] args) {
+        if (instance == null) {
+            instance = new Parser(args);
+        }
+        return instance;
     }
 
     private void readFromFile(String filePath) {

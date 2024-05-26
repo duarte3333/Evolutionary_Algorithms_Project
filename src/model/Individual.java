@@ -1,4 +1,7 @@
-package src;
+package src.model;
+
+import src.service.Event;
+
 import java.util.*;
 
 public class Individual {
@@ -13,12 +16,10 @@ public class Individual {
     private double comfort;
     private double time;
     private Event event;
-    private boolean action;
 
     public Individual(Map<Patrol, List<PlanetarySystem>> allocation) {
         this.allocation = allocation;
         this.comfort = calculateComfort();
-        this.action = false;
     }
 
     public void setEvent(Event event) {
@@ -50,12 +51,17 @@ public class Individual {
             tmin += minTime;
         }
         tmin /= allocation.keySet().size();
+        System.out.println("tmin: " + tmin);
 
         // Calculate tz 
-        double tz = 0;
+        double tz = -1;
+        double my_sum = 0;
         for (Patrol patrol : allocation.keySet()) {
             for (PlanetarySystem system : allocation.get(patrol)) {
-                tz += system.getTimeForPatrol(patrol.getId());
+                my_sum += system.getTimeForPatrol(patrol.getId());
+            }
+            if (my_sum > tz) {
+                tz = my_sum;
             }
         }
         return tmin / tz;

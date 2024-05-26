@@ -1,9 +1,10 @@
 # Define variables
 JAVAC = javac
 JAR = jar
-JAVA_FILES = $(wildcard src/*.java)
-CLASS_FILES = $(patsubst src/%.java,bin/%.class,$(JAVA_FILES))
-MAIN_CLASS = Main
+SRC_DIRS = src/main src/model src/service src/util
+JAVA_FILES = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.java))
+CLASS_FILES = $(patsubst src/%.java, bin/%.class, $(JAVA_FILES))
+MAIN_CLASS = main.Main
 MANIFEST = manifest.txt
 JAR_FILE = MyJarProject.jar
 
@@ -30,5 +31,6 @@ clean:
 run:
 	@echo "Running the JAR file..."
 	java -jar $(JAR_FILE) -r 3 6 10 10 100 10 1 1
+
 # Phony targets
-.PHONY: all clean
+.PHONY: all clean run
