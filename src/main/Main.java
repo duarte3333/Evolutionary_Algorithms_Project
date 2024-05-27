@@ -70,103 +70,25 @@ public class Main {
         double Tmutation = -mutationRate * Math.log(1 - nextMutationSample);
         double Treproduction = -reproductionRate * Math.log(1 - nextReproductionSample);
         
-        Event event = null;
+        EventType eventType = null;
         if (Tmutation < Tdeath && Tmutation < Treproduction) {
-            event = new Event(EventType.MUTATE); // Mutation
+            eventType = EventType.MUTATE; // Mutation
         } else if (Treproduction < Tdeath && Treproduction < Tmutation) {
-            event = new Event(EventType.REPRODUCE); // Reproduction
+            eventType = EventType.REPRODUCE; // Reproduction
         } else if (Tdeath < Tmutation && Tdeath < Treproduction) {
-            event = new Event(EventType.DEATH); // Death
+            eventType = EventType.DEATH; // Death
         }
-    
-        if (event == null) {
-            throw new IllegalStateException("No event could be determined for individual with comfort " + individual.getComfort());
-        }
-    
-        individual.setEvent(event);
         double nextEventTime = Math.min(Tdeath, Math.min(Tmutation, Treproduction));
+        Event event = EventFactory.createEvent(eventType, individual, nextEventTime);
+        individual.setEvent(event);
         return nextEventTime;
     }
 
+
     public double performEvent(Individual individual, double currentTime) {
         Event event = individual.getEvent();
-        switch (event.getType()) {
-            case DEATH:
-                death(individual);
-                break;
-            case MUTATE:
-                mutate(individual, currentTime);
-                break;
-            case REPRODUCE:
-                reproduce(individual, currentTime);
-                break;
-        }
+        event.trigger();
         return individual.getTime();
-    }
-
-    private void mutate(Individual individual, double currentTime) {
-        // Select a random patrol
-        System.out.println("---mutate: ");
-        int randomPatrolIndex = random.nextInt(patrols.size());
-        Patrol randomPatrol = patrols.get(randomPatrolIndex);
-        List<PlanetarySystem> systemsRandomPatrol = individual.getAllocation().get(randomPatrol);
-        
-        if (!systemsRandomPatrol.isEmpty()) {
-            // Remove a random system from the chosen random patrol
-            PlanetarySystem system = individual.getAllocation().get(randomPatrol).remove(random.nextInt(systemsRandomPatrol.size()));
-
-            // Select a new patrol to move the system to
-            int newPatrolIndex = random.nextInt(patrols.size());
-            while (newPatrolIndex == randomPatrolIndex) {
-                newPatrolIndex = random.nextInt(patrols.size());
-            }
-            Patrol newPatrol = patrols.get(newPatrolIndex);
-            individual.getAllocation().get(newPatrol).add(system);
-        }
-        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual);
-        individual.setTime(nextEventTime + currentTime);
-    }
-
-    private void reproduce(Individual individual, double currentTime) {
-        System.out.println("---reproduce: ");
-        Map<Patrol, List<PlanetarySystem>> new_allocation = new HashMap<>(individual.getAllocation());
-        int numberOfSystemsToRemove = (int)Math.floor((1 - individual.getComfort())*systems.size());
-        
-        //System.out.println("---Number of systems to remove: " + numberOfSystemsToRemove);
-        List<PlanetarySystem> systems_to_remove = new ArrayList<>();
-        List<PlanetarySystem> tmp_system = new ArrayList<>(this.systems); // Create a copy of this.systems
-        //System.out.println("---Systems: " + tmp_system);
-        for (int i = 0; i < numberOfSystemsToRemove; i++) {
-            int randomIndex = random.nextInt(tmp_system.size());
-            systems_to_remove.add(tmp_system.get(randomIndex));
-            tmp_system.remove(randomIndex);
-        }
-        
-        //Remove the random systems from the new allocation
-        for (Patrol patrol : new_allocation.keySet()) {
-            new_allocation.get(patrol).removeAll(systems_to_remove);
-        }
-        
-        //Assign in random order the removed systems to the patrols
-        for (PlanetarySystem system : systems_to_remove) {
-            Patrol randomPatrol = patrols.get(random.nextInt(patrols.size()));
-            new_allocation.get(randomPatrol).add(system);
-        }
-
-        Individual newIndividual = new Individual(new_allocation);
-        population.addIndividual(newIndividual);
-        System.out.println("---Dize population " + population.getIndividuals().size());
-
-        double nextEventTimeNew = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, newIndividual);
-        newIndividual.setTime(nextEventTimeNew + currentTime);
-
-        double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual);
-        individual.setTime(nextEventTime + currentTime);
-    }
-
-    private void death(Individual individual) {
-        System.out.println("---death: ");
-        population.getIndividuals().remove(individual);
     }
 
     public void run() {
