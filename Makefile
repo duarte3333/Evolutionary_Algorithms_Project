@@ -37,9 +37,13 @@ clean:
 	@rm -f $(JAR_FILE)
 	@rm -rf $(DOC_DIR)
 
-run:
+command:
 	@echo "Running the JAR file..."
-	java -jar $(JAR_FILE) -r 3 6 100 100 1000 10 1 1
+	java -jar $(JAR_FILE) -r 3 6 1000 100 1000 10 1 1
+
+file:
+	@echo "Running the JAR file..."
+	java -jar $(JAR_FILE) -f ./TESTS/input.txt 
 
 # Phony targets
 .PHONY: all clean run javadoc

@@ -131,7 +131,7 @@ public class Main {
             events++;
 
             if ((events % observationInterval) == 0 || currentTime >= tau) {
-                //outputObservation(currentTime, events, epidemics);
+                outputObservation(currentTime, events, epidemics);
             }
         }
 
@@ -147,49 +147,12 @@ public class Main {
         System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
         System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
         System.out.println("Comfort: " + bestIndividual.getComfort());
-        //print max time
-        double maxTime = 0;
-        for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
-            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol))
-                maxTime += system.getTimeForPatrol(patrol.getId());
-        }
-        System.out.println("Max time: " + maxTime);
 
-
-        // Output other candidate distributions if available
-        int numberOfCandidates = Math.min(5, population.getIndividuals().size());
-        for (int i = 1; i < numberOfCandidates; i++) {
+        int numberOfCandidates = Math.min(5, population.getIndividuals().size() - 1);
+        for (int i = 1; i <= numberOfCandidates; i++) {
             Individual individual = population.getIndividuals().get(i);
-            System.out.println("Other candidate distribution " + i + ": " + formatAllocation(individual.getAllocation()));
-            System.out.println("Empire policing time: " + (1 / individual.getComfort()));
-            System.out.println("Comfort: " + individual.getComfort());
-            double my_time = 0;
-            double myMaxTime = -1;
-            for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
-                //int max integer
-                my_time = 0;
-                for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol))
-                    my_time += system.getTimeForPatrol(patrol.getId());
-                if (my_time > myMaxTime) {
-                    myMaxTime = my_time;
-                }
-            }
-            System.out.println("Max time: " + myMaxTime);
+            System.out.println("otherdist" + i + ": " + formatAllocation(individual.getAllocation()) + " : " + (1 / individual.getComfort()) + " : " + individual.getComfort());
         }
-        System.out.println();
-    }
-    
-    private void outputFinalObservation(double time, int events, int epidemics) {
-        Individual bestIndividual = population.getBestIndividual(); //Temos de dar store ao melhor ao individuo da simulação inteira e n só do melhor no ultimo instante
-        System.out.println("Final instant: " + time);
-        System.out.println("Total events: " + events);
-        System.out.println("Final population size: " + population.getIndividuals().size());
-        System.out.println("Total number of epidemics: " + epidemics);
-        System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
-        System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
-        System.out.println("Final comfort: " + bestIndividual.getComfort());
-        //System.out.println("Final All Time comfort: " + bestIndividualAllTime.getComfort());
-        //print max time
         double my_time = 0;
         double maxTime = -1;
         for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
@@ -201,38 +164,62 @@ public class Main {
                 maxTime = my_time;
             }
         }
-        System.out.println("Max time: " + maxTime);
-        //print max time
-        // double _my_time = 0;
-        // double _maxTime = -1;
-        // for (Patrol patrol : bestIndividualAllTime.getAllocation().keySet()) {
-        //     //int max integer
-        //     _my_time = 0;
-        //     for (PlanetarySystem system : bestIndividualAllTime.getAllocation().get(patrol))
-        //         _my_time += system.getTimeForPatrol(patrol.getId());
-        //     if (_my_time > _maxTime) {
-        //         _maxTime = _my_time;
-        //     }
-        // }
-        // System.out.println("Max time, best all time: " + _maxTime);
+        System.out.println("-Max time: " + maxTime);
+        System.out.println();
+    }
 
+    private void outputFinalObservation(double time, int events, int epidemics) {
+        Individual bestIndividual = population.getBestIndividual();
+        System.out.println("Final instant: " + time);
+        System.out.println("Total events: " + events);
+        System.out.println("Final population size: " + population.getIndividuals().size());
+        System.out.println("Total number of epidemics: " + epidemics);
+        System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
+        System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
+        System.out.println("Final comfort: " + bestIndividual.getComfort());
+        double my_time = 0;
+        double maxTime = -1;
+        for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
+            //int max integer
+            my_time = 0;
+            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol))
+            my_time += system.getTimeForPatrol(patrol.getId());
+            if (my_time > maxTime) {
+                maxTime = my_time;
+            }
+        }
+        System.out.println("-Max time: " + maxTime);
         System.out.println();
     }
     
+
     private String formatAllocation(Map<Patrol, List<PlanetarySystem>> allocation) {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
+    
+        // Extract entries and sort by patrol ID
+        List<Map.Entry<Patrol, List<PlanetarySystem>>> entries = new ArrayList<>(allocation.entrySet());
+        entries.sort(Comparator.comparingInt(e -> e.getKey().getId()));
+    
         boolean firstPatrol = true;
-        for (Map.Entry<Patrol, List<PlanetarySystem>> entry : allocation.entrySet()) {
+        for (Map.Entry<Patrol, List<PlanetarySystem>> entry : entries) {
             if (!firstPatrol) {
                 sb.append(", ");
             }
             firstPatrol = false;
-            sb.append(entry.getKey()).append(": ").append(entry.getValue());
+            sb.append("{");
+            for (int i = 0; i < entry.getValue().size(); i++) {
+                if (i > 0) {
+                    sb.append(",");
+                }
+                sb.append(entry.getValue().get(i).getId());
+            }
+            sb.append("}");
         }
         sb.append("}");
         return sb.toString();
-    } 
+    }
+    
 
     public Population getPopulation() {
         return population;
