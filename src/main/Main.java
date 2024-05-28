@@ -3,10 +3,11 @@ package src.main;
 import src.model.*;
 import src.service.*;
 import src.util.Parser;
-
 import java.util.*;
 
-
+/**
+ * The main class for running the simulation.
+ */
 public class Main {
     public  static Main instance;
     private Population population;
@@ -17,8 +18,6 @@ public class Main {
     private double deathRate;
     private double mutationRate;
     private double reproductionRate;
-    private Individual bestIndividualAllTime;
-
     private Random random = new Random();
 
     public Main(List<Patrol> patrols, List<PlanetarySystem> systems, 
@@ -31,9 +30,23 @@ public class Main {
         this.deathRate = deathRate;
         this.mutationRate = mutationRate;
         this.reproductionRate = reproductionRate;
-        this.population = Population.getInstance(maxPopulation);
+        population = Population.getInstance(maxPopulation);
     }
 
+
+    /**
+     * Returns the singleton instance of the Main class.
+     *
+     * @param patrols List of patrols.
+     * @param systems List of planetary systems.
+     * @param tau The final instant of evolution.
+     * @param initialPopulation Initial population size.
+     * @param maxPopulation Maximum population size.
+     * @param deathRate Death rate.
+     * @param mutationRate Mutation rate.
+     * @param reproductionRate Reproduction rate.
+     * @return The singleton instance of the Main class.
+     */
     public static Main getInstance(List<Patrol> patrols, List<PlanetarySystem> systems, 
                                    int tau, int initialPopulation, int maxPopulation,
                                    double deathRate, double mutationRate, double reproductionRate) {
@@ -43,9 +56,13 @@ public class Main {
         return instance;
     }
 
+    /**
+     * Generates the initial population for the simulation.
+     */
     private void generateInitialPopulation() {
         for (int i = 0; i < this.initialPopulation; i++) {
             Map<Patrol, List<PlanetarySystem>> allocation = new HashMap<>();
+
             // Generate a list of systems for each patrol
             for (Patrol patrol : this.patrols) { 
                 allocation.put(patrol, new ArrayList<>());
@@ -58,45 +75,66 @@ public class Main {
         }
     }
 
-    private double performEvent(Individual individual) {
+
+    /**
+     * Sets the next event for the given individual.
+     *
+     * @param currentTime The current time in the simulation.
+     * @param individual The individual for which to set the next event.
+     */
+    public void setNextEvent(double currentTime, Individual individual) {
+        EventFactory eventFactory = new EventFactory(reproductionRate, mutationRate, deathRate, random);
+        Event event = eventFactory.createEvent(individual);
+        individual.setEvent(event);
+        individual.setTime(event.getTime() + currentTime);
+    }
+
+    /**
+     * Performs the next event for the given individual.
+     *
+     * @param individual The individual for which to perform the next event.
+     * @param currentTime The current time in the simulation.
+     * @return The time at which the event occurred.
+     */
+    public double performEvent(Individual individual, double currentTime) {
         Event event = individual.getEvent();
-        event.trigger(individual.getTime());
+        event.execute(individual, currentTime, this);
         return individual.getTime();
     }
 
+    /**
+     * Runs the simulation.
+     */
     public void run() {
         generateInitialPopulation();
         int events = 0;
         int epidemics = 0;
-        double currentTime = 0;
-        int observationInterval = Math.max(1, tau / 20); // n percebo a cena do a: 
-        for (Individual individual : population.getIndividuals()) {
-            Event.setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual, currentTime, this.systems, this.patrols, population);
-        }
-       
-        while (currentTime < tau && !population.getIndividuals().isEmpty()) { // Tbm deviamos ver no loop se o confort do melhor individuo é 1
-            bestIndividualAllTime = population.getBestIndividual();
-            if (bestIndividualAllTime.getComfort() <= population.getBestIndividual().getComfort()) {
-                bestIndividualAllTime = population.getBestIndividual();
-            }
+        double currentTime = 0.0;
+        int observationInterval = Math.max(1, tau / 20);
 
+        //give me an alternative
+        for (Individual individual : population.getIndividuals()) {
+            setNextEvent(currentTime, individual);
+        }
+
+        while (currentTime < tau && !population.getIndividuals().isEmpty()) {
             List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
             individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
 
             if (population.getIndividuals().size() >= population.getMaxPopulation()) {
-                System.out.println("......Handling epidemic");
                 population.handleEpidemic();
                 epidemics++;
             }
 
             if (currentTime > tau) break;
-            currentTime = performEvent(individualsByTime.get(0));
+            currentTime = performEvent(individualsByTime.get(0), currentTime);
             events++;
 
             if ((events % observationInterval) == 0 || currentTime >= tau) {
                 //outputObservation(currentTime, events, epidemics);
             }
         }
+
         outputFinalObservation(currentTime, events, epidemics);
     }
 
@@ -150,7 +188,7 @@ public class Main {
         System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
         System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
         System.out.println("Final comfort: " + bestIndividual.getComfort());
-        System.out.println("Final All Time comfort: " + bestIndividualAllTime.getComfort());
+        //System.out.println("Final All Time comfort: " + bestIndividualAllTime.getComfort());
         //print max time
         double my_time = 0;
         double maxTime = -1;
@@ -165,18 +203,18 @@ public class Main {
         }
         System.out.println("Max time: " + maxTime);
         //print max time
-        double _my_time = 0;
-        double _maxTime = -1;
-        for (Patrol patrol : bestIndividualAllTime.getAllocation().keySet()) {
-            //int max integer
-            _my_time = 0;
-            for (PlanetarySystem system : bestIndividualAllTime.getAllocation().get(patrol))
-                _my_time += system.getTimeForPatrol(patrol.getId());
-            if (_my_time > _maxTime) {
-                _maxTime = _my_time;
-            }
-        }
-        System.out.println("Max time, best all time: " + _maxTime);
+        // double _my_time = 0;
+        // double _maxTime = -1;
+        // for (Patrol patrol : bestIndividualAllTime.getAllocation().keySet()) {
+        //     //int max integer
+        //     _my_time = 0;
+        //     for (PlanetarySystem system : bestIndividualAllTime.getAllocation().get(patrol))
+        //         _my_time += system.getTimeForPatrol(patrol.getId());
+        //     if (_my_time > _maxTime) {
+        //         _maxTime = _my_time;
+        //     }
+        // }
+        // System.out.println("Max time, best all time: " + _maxTime);
 
         System.out.println();
     }
@@ -194,7 +232,19 @@ public class Main {
         }
         sb.append("}");
         return sb.toString();
-    }    
+    } 
+
+    public Population getPopulation() {
+        return population;
+    }
+
+    public List<Patrol> getPatrols() {
+        return patrols;
+    }
+
+    public List<PlanetarySystem> getSystems() {
+        return systems;
+    }
 
     //java -jar project.jar      -r     n m  τ    ν νmax μ ρ δ
     //java -jar MyJarProject.jar -r     3 6  1000 4 0.1  1 1 1

@@ -3,7 +3,7 @@ package src.service;
 import src.model.Individual;
 import java.util.*;
 
-public class Population {
+public class Population{
     private List<Individual> individuals;
     private int maxPopulation;
     public static Population instance;

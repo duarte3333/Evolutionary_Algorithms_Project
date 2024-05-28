@@ -51,7 +51,6 @@ public class Individual {
             tmin += minTime;
         }
         tmin /= allocation.keySet().size();
-        //System.out.println("tmin: " + tmin);
 
         // Calculate tz 
         double tz = -1;
