@@ -183,7 +183,7 @@ public class Main {
             //int max integer
             my_time = 0;
             for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol))
-            my_time += system.getTimeForPatrol(patrol.getId());
+                my_time += system.getTimeForPatrol(patrol.getId());
             if (my_time > maxTime) {
                 maxTime = my_time;
             }
@@ -196,11 +196,11 @@ public class Main {
     private String formatAllocation(Map<Patrol, List<PlanetarySystem>> allocation) {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-    
+
         // Extract entries and sort by patrol ID
         List<Map.Entry<Patrol, List<PlanetarySystem>>> entries = new ArrayList<>(allocation.entrySet());
         entries.sort(Comparator.comparingInt(e -> e.getKey().getId()));
-    
+
         boolean firstPatrol = true;
         for (Map.Entry<Patrol, List<PlanetarySystem>> entry : entries) {
             if (!firstPatrol) {
@@ -208,6 +208,7 @@ public class Main {
             }
             firstPatrol = false;
             sb.append("{");
+            sb.append(entry.getKey().getId()).append(": ");
             for (int i = 0; i < entry.getValue().size(); i++) {
                 if (i > 0) {
                     sb.append(",");
@@ -248,17 +249,6 @@ public class Main {
         double delta = parser.getDelta(); // Comfort threshold
         int[][] C = parser.getC(); // Time required by each patrol to pacify each system
         
-        System.out.println("n: " + parser.getN());
-        // List of patrols
-        int[][] sintetic_C = new int[][]{
-            {1, 2, 3},
-            {2, 2, 3},
-            {1, 2, 3},
-            {1, 2, 3},
-            {2, 2, 3},
-            {1, 2, 3}
-        };
-
         List<Patrol> patrols = new ArrayList<>(n);
         for (int i = 0; i < parser.getN(); i++) {
             patrols.add(new Patrol(i));
@@ -266,7 +256,7 @@ public class Main {
 
         List<PlanetarySystem> systems = new ArrayList<>(m);
         for (int i = 0; i < m; i++) {
-            systems.add(new PlanetarySystem(i, sintetic_C[i % sintetic_C.length]));
+            systems.add(new PlanetarySystem(i, C[i % C.length]));
         }
 
         Main algorithm = Main.getInstance(patrols, systems, tau, nu, nuMax, mu, rho, delta);
