@@ -17,6 +17,7 @@ public class Main {
     private double deathRate;
     private double mutationRate;
     private double reproductionRate;
+    private Individual bestIndividualAllTime;
 
     private Random random = new Random();
 
@@ -30,7 +31,7 @@ public class Main {
         this.deathRate = deathRate;
         this.mutationRate = mutationRate;
         this.reproductionRate = reproductionRate;
-        population = Population.getInstance(maxPopulation);
+        this.population = Population.getInstance(maxPopulation);
     }
 
     public static Main getInstance(List<Patrol> patrols, List<PlanetarySystem> systems, 
@@ -57,37 +58,9 @@ public class Main {
         }
     }
 
-    private double setNextEvent(double coffReproduction, double coffMutation, double coffDeath, Individual individual) {
-        double deathRate = (1 - Math.log(1 - individual.getComfort())) * coffDeath;
-        double mutationRate = (1 - Math.log(individual.getComfort())) * coffMutation;
-        double reproductionRate = (1 - Math.log(individual.getComfort())) * coffReproduction;
-
-        double nextDeathSample = random.nextDouble();
-        double nextMutationSample = random.nextDouble();
-        double nextReproductionSample = random.nextDouble();
-        
-        double Tdeath = -deathRate * Math.log(1 - nextDeathSample);
-        double Tmutation = -mutationRate * Math.log(1 - nextMutationSample);
-        double Treproduction = -reproductionRate * Math.log(1 - nextReproductionSample);
-        
-        EventType eventType = null;
-        if (Tmutation < Tdeath && Tmutation < Treproduction) {
-            eventType = EventType.MUTATE; // Mutation
-        } else if (Treproduction < Tdeath && Treproduction < Tmutation) {
-            eventType = EventType.REPRODUCE; // Reproduction
-        } else if (Tdeath < Tmutation && Tdeath < Treproduction) {
-            eventType = EventType.DEATH; // Death
-        }
-        double nextEventTime = Math.min(Tdeath, Math.min(Tmutation, Treproduction));
-        Event event = EventFactory.createEvent(eventType, individual, nextEventTime);
-        individual.setEvent(event);
-        return nextEventTime;
-    }
-
-
-    public double performEvent(Individual individual, double currentTime) {
+    private double performEvent(Individual individual) {
         Event event = individual.getEvent();
-        event.trigger();
+        event.trigger(individual.getTime());
         return individual.getTime();
     }
 
@@ -96,18 +69,18 @@ public class Main {
         int events = 0;
         int epidemics = 0;
         double currentTime = 0;
-
         int observationInterval = Math.max(1, tau / 20); // n percebo a cena do a: 
         for (Individual individual : population.getIndividuals()) {
-            double nextEventTime = setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual);
-            System.out.println("time-- " + nextEventTime);
-            individual.setTime(nextEventTime);
+            Event.setNextEvent(this.reproductionRate, this.mutationRate, this.deathRate, individual, currentTime, this.systems, this.patrols, population);
         }
        
         while (currentTime < tau && !population.getIndividuals().isEmpty()) { // Tbm deviamos ver no loop se o confort do melhor individuo é 1
+            bestIndividualAllTime = population.getBestIndividual();
+            if (bestIndividualAllTime.getComfort() <= population.getBestIndividual().getComfort()) {
+                bestIndividualAllTime = population.getBestIndividual();
+            }
 
             List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
-            //Sort individuals by time
             individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
 
             if (population.getIndividuals().size() >= population.getMaxPopulation()) {
@@ -117,14 +90,13 @@ public class Main {
             }
 
             if (currentTime > tau) break;
-            currentTime = performEvent(individualsByTime.get(0), currentTime);
+            currentTime = performEvent(individualsByTime.get(0));
             events++;
 
             if ((events % observationInterval) == 0 || currentTime >= tau) {
-                outputObservation(currentTime, events, epidemics);
+                //outputObservation(currentTime, events, epidemics);
             }
         }
-
         outputFinalObservation(currentTime, events, epidemics);
     }
 
@@ -178,6 +150,7 @@ public class Main {
         System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
         System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
         System.out.println("Final comfort: " + bestIndividual.getComfort());
+        System.out.println("Final All Time comfort: " + bestIndividualAllTime.getComfort());
         //print max time
         double my_time = 0;
         double maxTime = -1;
@@ -191,6 +164,20 @@ public class Main {
             }
         }
         System.out.println("Max time: " + maxTime);
+        //print max time
+        double _my_time = 0;
+        double _maxTime = -1;
+        for (Patrol patrol : bestIndividualAllTime.getAllocation().keySet()) {
+            //int max integer
+            _my_time = 0;
+            for (PlanetarySystem system : bestIndividualAllTime.getAllocation().get(patrol))
+                _my_time += system.getTimeForPatrol(patrol.getId());
+            if (_my_time > _maxTime) {
+                _maxTime = _my_time;
+            }
+        }
+        System.out.println("Max time, best all time: " + _maxTime);
+
         System.out.println();
     }
     

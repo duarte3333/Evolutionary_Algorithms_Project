@@ -3,7 +3,7 @@ package src.service;
 import src.model.Individual;
 import java.util.*;
 
-public class Population implements IPopulation{
+public class Population {
     private List<Individual> individuals;
     private int maxPopulation;
     public static Population instance;
@@ -20,12 +20,10 @@ public class Population implements IPopulation{
         return instance;
     }
 
-    @Override
     public void addIndividual(Individual individual) {
         individuals.add(individual);
     }
 
-    @Override
     public void handleEpidemic() {
         // Sort individuals by comfort and keep the best ones
         // Comparator is a interface in JAVA
@@ -42,12 +40,10 @@ public class Population implements IPopulation{
         System.out.println("Number of survivors: " + individuals.size());
     }
 
-    @Override
     public List<Individual> getIndividuals() {
         return individuals;
     }
 
-    @Override
     public Individual getBestIndividual() {
         // a stream is a sequence of elements supporting sequential and parallel aggregate operations
         // orElse() returns the value if present, otherwise returns the default value
@@ -56,7 +52,6 @@ public class Population implements IPopulation{
                           .orElse(null);
     }
 
-    @Override
     public int getMaxPopulation() {
         return maxPopulation;
     }
