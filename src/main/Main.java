@@ -70,16 +70,9 @@ public class Main {
             int minTime = Integer.MAX_VALUE;
             for (Patrol patrol : patrols) {
                 minTime = Math.min(minTime, system.getTimeForPatrol(patrol.getId()));
-                //get the time for each patrol
-                // for (int l = 0; l < patrols.size(); l++) {
-                //    System.out.println("time for patrol" + l + ": " + system.getTimeForPatrol(l));
-                // } 
             }
             tmin += minTime;
-            //System.out.println("Min time: " + minTime);
-            //System.out.println("System: " + tmin);
         }
-        System.out.println("Sum Tmin: " + tmin);
         return tmin / patrols.size();
     }
 
@@ -289,7 +282,12 @@ public class Main {
 
         List<PlanetarySystem> systems = new ArrayList<>(m);
         for (int i = 0; i < m; i++) {
-            systems.add(new PlanetarySystem(i, C[i % C.length]));
+
+            int[] patrol_times = new int[C.length];
+            for (int j = 0; j < C.length; j++) {
+                patrol_times[j] = C[j][i];
+            }
+            systems.add(new PlanetarySystem(i, patrol_times));
         }
 
         Main algorithm = Main.getInstance(patrols, systems, tau, nu, nuMax, mu, rho, delta);

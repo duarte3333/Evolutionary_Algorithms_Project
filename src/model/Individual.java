@@ -22,7 +22,6 @@ public class Individual {
     public Individual(Map<Patrol, List<PlanetarySystem>> allocation, double tmin) {
         this.allocation = allocation;
         this.tmin = tmin;
-        System.out.println("Tmin: " + tmin);
         this.comfort = calculateComfort();
     }
 
@@ -89,7 +88,9 @@ public class Individual {
         double tz = 0;
         for (Patrol patrol : allocation.keySet()) {
             double patrolTime = 0;
+            System.out.println("Patrol:"+ patrol.getId());
             for (PlanetarySystem system : allocation.get(patrol)) {
+                System.out.println("System:" + system.getId() + " -> "+system.getTimeForPatrol(patrol.getId()));
                 patrolTime += system.getTimeForPatrol(patrol.getId());
             }
             tz = Math.max(tz, patrolTime);
