@@ -3,6 +3,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Class to parse the input arguments and read the input file.
+ */
 public class Parser {
     private static Parser instance;
     private int n, m, v, vmax, tau;
@@ -21,6 +24,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the singleton instance of the Parser class.
+     *
+     * @param args The command-line arguments.
+     * @return The singleton instance of the Parser class.
+     */
     public static Parser getInstance(String[] args) {
         if (instance == null) {
             instance = new Parser(args);
@@ -71,38 +80,83 @@ public class Parser {
         return matrix;
     }
 
+    /**
+     * Gets the number of patrols.
+     *
+     * @return The number of patrols.
+     */
     public int getN() {
         return n;
     }
 
+    /**
+     * Gets the number of systems.
+     *
+     * @return The number of systems.
+     */
     public int getM() {
         return m;
     }
 
+    /**
+     * Gets the final instant of evolution.
+     *
+     * @return The final instant of evolution.
+     */
     public int getTau() {
         return tau;
     }
 
+    /**
+     * Gets the initial population size.
+     *
+     * @return The initial population size.
+     */
     public int getNu() {
         return v;
     }
 
+    /**
+     * Gets the maximum population size.
+     *
+     * @return The maximum population size.
+     */
     public int getNuMax() {
         return vmax;
     }
 
+    /**
+     * Gets the mutation rate.
+     *
+     * @return The mutation rate.
+     */
     public double getMu() {
         return mu;
     }
 
+    /**
+     * Gets the reproduction rate.
+     *
+     * @return The reproduction rate.
+     */
     public double getRho() {
         return rho;
     }
 
+    /**
+     * Gets the comfort threshold.
+     *
+     * @return The comfort threshold.
+     */
     public double getDelta() {
         return delta;
     }
 
+    /**
+     * Gets the time required by each patrol to pacify each system.
+     *
+     * @return The time matrix.
+     */
     public int[][] getC() {
         return C;
     }

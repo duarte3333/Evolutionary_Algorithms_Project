@@ -7,14 +7,30 @@ import src.model.Patrol;
 
 import java.util.*;
 
+/**
+ * Class representing a reproduce event.
+ */
 public class ReproduceEvent extends Event {
     private Random random;
 
+    /**
+     * Constructs a ReproduceEvent with the given time and Random instance.
+     *
+     * @param time The time at which the event occurs.
+     * @param random The Random instance for generating random values.
+     */
     public ReproduceEvent(double time, Random random) {
         super(time);
         this.random = random;
     }
 
+    /**
+     * Executes the event on the given individual.
+     *
+     * @param individual The individual on which to execute the event.
+     * @param currentTime The current time.
+     * @param main The Main instance.
+     */
     @Override
     public void execute(Individual individual, double currentTime, Main main) {
         Map<Patrol, List<PlanetarySystem>> newAllocation = new HashMap<>(individual.getAllocation());
@@ -37,7 +53,7 @@ public class ReproduceEvent extends Event {
             newAllocation.get(randomPatrol).add(system);
         }
 
-        Individual newIndividual = new Individual(newAllocation);
+        Individual newIndividual = new Individual(newAllocation, main.getTmin());
         main.getPopulation().addIndividual(newIndividual);
         main.setNextEvent(currentTime, newIndividual);
         main.setNextEvent(currentTime, individual);

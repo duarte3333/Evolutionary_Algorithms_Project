@@ -3,16 +3,30 @@ package src.service;
 import src.model.Individual;
 import java.util.*;
 
+/**
+ * Class representing a population of individuals.
+ */
 public class Population{
     private List<Individual> individuals;
     private int maxPopulation;
     public static Population instance;
 
+    /**
+     * Constructs a Population with the given maximum population size.
+     *
+     * @param _maxPopulation The maximum population size.
+     */
     public Population(int _maxPopulation) {
         this.individuals = new ArrayList<>();
         this.maxPopulation = _maxPopulation;
     }
 
+    /**
+     * Returns the instance of the Population class.
+     *
+     * @param _maxPopulation The maximum population size.
+     * @return The instance of the Population class.
+     */
     public static Population getInstance(int _maxPopulation) {
         if (instance == null) {
             instance = new Population(_maxPopulation);
@@ -20,10 +34,18 @@ public class Population{
         return instance;
     }
 
+    /**
+     * Adds an individual to the population.
+     *
+     * @param individual The individual to add.
+     */
     public void addIndividual(Individual individual) {
         individuals.add(individual);
     }
 
+    /**
+     * Handles an epidemic by keeping the best individuals and allowing others to survive based on their comfort.
+     */
     public void handleEpidemic() {
         // Sort individuals by comfort and keep the best ones
         // Comparator is a interface in JAVA

@@ -18,7 +18,9 @@ public class Main {
     private double deathRate;
     private double mutationRate;
     private double reproductionRate;
+    private double t_min;
     private Random random = new Random();
+    private Individual bestIndividualAllTime;
 
     public Main(List<Patrol> patrols, List<PlanetarySystem> systems, 
                 int tau, int initialPopulation, int maxPopulation,
@@ -30,6 +32,7 @@ public class Main {
         this.deathRate = deathRate;
         this.mutationRate = mutationRate;
         this.reproductionRate = reproductionRate;
+        this.t_min = calculateTmin();
         population = Population.getInstance(maxPopulation);
     }
 
@@ -57,6 +60,30 @@ public class Main {
     }
 
     /**
+     * Calculates the minimum patrol time (tmin) across all planetary systems.
+     *
+     * @return The minimum patrol time.
+     */
+    private double calculateTmin() {
+        double tmin = 0;
+        for (PlanetarySystem system : systems) {
+            int minTime = Integer.MAX_VALUE;
+            for (Patrol patrol : patrols) {
+                minTime = Math.min(minTime, system.getTimeForPatrol(patrol.getId()));
+                //get the time for each patrol
+                // for (int l = 0; l < patrols.size(); l++) {
+                //    System.out.println("time for patrol" + l + ": " + system.getTimeForPatrol(l));
+                // } 
+            }
+            tmin += minTime;
+            //System.out.println("Min time: " + minTime);
+            //System.out.println("System: " + tmin);
+        }
+        System.out.println("Sum Tmin: " + tmin);
+        return tmin / patrols.size();
+    }
+
+    /**
      * Generates the initial population for the simulation.
      */
     private void generateInitialPopulation() {
@@ -71,7 +98,7 @@ public class Main {
                 Patrol randomPatrol = patrols.get(random.nextInt(patrols.size()));
                 allocation.get(randomPatrol).add(system);
             }
-            population.addIndividual(new Individual(allocation));
+            population.addIndividual(new Individual(allocation, t_min));
         }
     }
 
@@ -116,10 +143,15 @@ public class Main {
         for (Individual individual : population.getIndividuals()) {
             setNextEvent(currentTime, individual);
         }
-
+        
+        bestIndividualAllTime = population.getBestIndividual();
         while (currentTime < tau && !population.getIndividuals().isEmpty()) {
             List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
             individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+
+            if (population.getBestIndividual().getComfort() > bestIndividualAllTime.getComfort()) {
+                bestIndividualAllTime = population.getBestIndividual();
+            }
 
             if (population.getIndividuals().size() >= population.getMaxPopulation()) {
                 population.handleEpidemic();
@@ -127,6 +159,7 @@ public class Main {
             }
 
             if (currentTime > tau) break;
+            if (population.getBestIndividual().getComfort() == 1) break;
             currentTime = performEvent(individualsByTime.get(0), currentTime);
             events++;
 
@@ -153,18 +186,15 @@ public class Main {
             Individual individual = population.getIndividuals().get(i);
             System.out.println("otherdist" + i + ": " + formatAllocation(individual.getAllocation()) + " : " + (1 / individual.getComfort()) + " : " + individual.getComfort());
         }
-        double my_time = 0;
-        double maxTime = -1;
+        double tz = 0;
         for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
-            //int max integer
-            my_time = 0;
-            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol))
-                my_time += system.getTimeForPatrol(patrol.getId());
-            if (my_time > maxTime) {
-                maxTime = my_time;
+            double patrolTime = 0;
+            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol)) {
+                patrolTime += system.getTimeForPatrol(patrol.getId());
             }
+            tz = Math.max(tz, patrolTime);
         }
-        System.out.println("-Max time: " + maxTime);
+        System.out.println("-tz: " + tz);
         System.out.println();
     }
 
@@ -177,18 +207,17 @@ public class Main {
         System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
         System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
         System.out.println("Final comfort: " + bestIndividual.getComfort());
-        double my_time = 0;
-        double maxTime = -1;
+        System.out.println("Comfort All Time: " + bestIndividualAllTime.getComfort());
+
+        double tz = 0;
         for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
-            //int max integer
-            my_time = 0;
-            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol))
-                my_time += system.getTimeForPatrol(patrol.getId());
-            if (my_time > maxTime) {
-                maxTime = my_time;
+            double patrolTime = 0;
+            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol)) {
+                patrolTime += system.getTimeForPatrol(patrol.getId());
             }
+            tz = Math.max(tz, patrolTime);
         }
-        System.out.println("-Max time: " + maxTime);
+        System.out.println("-tz: " + tz);
         System.out.println();
     }
     
@@ -232,6 +261,10 @@ public class Main {
 
     public List<PlanetarySystem> getSystems() {
         return systems;
+    }
+
+    public double getTmin() {
+        return t_min;
     }
 
     //java -jar project.jar      -r     n m  τ    ν νmax μ ρ δ

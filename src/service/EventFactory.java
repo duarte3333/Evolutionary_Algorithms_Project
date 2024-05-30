@@ -3,12 +3,24 @@ package src.service;
 
 import src.model.Individual;
 import java.util.Random;
+
+/**
+ * Factory class to create events.
+ */
 public class EventFactory {
     private double reproductionRate;
     private double mutationRate;
     private double deathRate;
     private Random random;
 
+    /**
+     * Constructs an EventFactory with the given parameters.
+     *
+     * @param reproductionRate The reproduction rate.
+     * @param mutationRate The mutation rate.
+     * @param deathRate The death rate.
+     * @param random The Random instance for generating random values.
+     */
     public EventFactory(double reproductionRate, double mutationRate, double deathRate, Random random) {
         this.reproductionRate = reproductionRate;
         this.mutationRate = mutationRate;
@@ -16,6 +28,12 @@ public class EventFactory {
         this.random = random;
     }
 
+    /**
+     * Creates an event for the given individual.
+     *
+     * @param individual The individual for which to create an event.
+     * @return The created event.
+     */
     public Event createEvent(Individual individual) {
         double comfort = individual.getComfort();
         double deathRate = (1 - Math.log(1 - comfort)) * this.deathRate;

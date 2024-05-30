@@ -8,14 +8,30 @@ import src.model.PlanetarySystem;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class representing a mutate event.
+ */
 public class MutateEvent extends Event {
     private Random random;
 
+    /**
+     * Constructs a MutateEvent with the given time and Random instance.
+     *
+     * @param time The time at which the event occurs.
+     * @param random The Random instance for generating random values.
+     */
     public MutateEvent(double time, Random random) {
         super(time);
         this.random = random;
     }
 
+    /**
+     * Executes the event on the given individual.
+     *
+     * @param individual The individual on which to execute the event.
+     * @param currentTime The current time.
+     * @param main The Main instance.
+     */
     @Override
     public void execute(Individual individual, double currentTime, Main main) {
         List<Patrol> patrols = main.getPatrols();
