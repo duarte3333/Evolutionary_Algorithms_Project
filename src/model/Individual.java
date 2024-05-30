@@ -12,6 +12,7 @@ public class Individual {
     private double time;
     private double comfort;
     private double tmin;
+    private int policing_time;
 
     /**
      * Constructs an Individual with the given allocation and tmin.
@@ -22,6 +23,7 @@ public class Individual {
     public Individual(Map<Patrol, List<PlanetarySystem>> allocation, double tmin) {
         this.allocation = allocation;
         this.tmin = tmin;
+        this.policing_time = calculatePolicingTime();
         this.comfort = calculateComfort();
     }
 
@@ -71,6 +73,15 @@ public class Individual {
     }
 
     /**
+     * Gets the policing time of the individual.
+     *
+     * @return The policing time of the individual.
+     */
+    public double getPolicingTime() {
+        return policing_time;
+    }
+
+    /**
      * Gets the comfort of the individual.
      *
      * @return The comfort of the individual.
@@ -80,21 +91,29 @@ public class Individual {
     }
 
     /**
+     * Calculates the time it takes the individual to patrol the empire.
+     *
+     * @return The time to patrol the empire of the individual.
+     */
+    private int calculatePolicingTime() {
+        int tz = 0;
+        for (Patrol patrol : allocation.keySet()) {
+            int patrolTime = 0;
+            for (PlanetarySystem system : allocation.get(patrol)) {
+                patrolTime += system.getTimeForPatrol(patrol.getId());
+            }
+            tz = Math.max(tz, patrolTime);
+        }
+        return tz;
+    }
+
+    /**
      * Calculates the comfort of the individual.
      *
      * @return The comfort of the individual.
      */
     private double calculateComfort() {
-        double tz = 0;
-        for (Patrol patrol : allocation.keySet()) {
-            double patrolTime = 0;
-            System.out.println("Patrol:"+ patrol.getId());
-            for (PlanetarySystem system : allocation.get(patrol)) {
-                System.out.println("System:" + system.getId() + " -> "+system.getTimeForPatrol(patrol.getId()));
-                patrolTime += system.getTimeForPatrol(patrol.getId());
-            }
-            tz = Math.max(tz, patrolTime);
-        }
+        int tz = policing_time;
         return tmin / tz;
     }
 }

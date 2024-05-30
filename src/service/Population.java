@@ -1,7 +1,11 @@
 package src.service;
 
 import src.model.Individual;
+import src.model.Patrol;
+import src.model.PlanetarySystem;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class representing a population of individuals.
@@ -72,6 +76,18 @@ public class Population{
         return individuals.stream()
                           .max(Comparator.comparingDouble(Individual::getComfort))
                           .orElse(null);
+    }
+
+    public List<Individual> getCandidateDistributions(int count) {
+    // Use a set to keep track of allocations we've already seen
+    Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
+
+    // Stream, sort, filter, and collect the top 'count' individuals with unique allocations
+    return individuals.stream()
+                        .sorted(Comparator.comparingDouble(Individual::getComfort).reversed())
+                        .filter(individual -> seenAllocations.add(individual.getAllocation()))
+                        .limit(count)
+                        .collect(Collectors.toList());
     }
 
     public int getMaxPopulation() {

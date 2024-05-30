@@ -4,6 +4,7 @@ import src.model.*;
 import src.service.*;
 import src.util.Parser;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The main class for running the simulation.
@@ -20,7 +21,8 @@ public class Main {
     private double reproductionRate;
     private double t_min;
     private Random random = new Random();
-    private Individual bestIndividualAllTime;
+    private Individual bestIndividual;
+    private List<Individual> candidateDistributions;
 
     public Main(List<Patrol> patrols, List<PlanetarySystem> systems, 
                 int tau, int initialPopulation, int maxPopulation,
@@ -137,24 +139,38 @@ public class Main {
             setNextEvent(currentTime, individual);
         }
         
-        bestIndividualAllTime = population.getBestIndividual();
+        bestIndividual = population.getBestIndividual();
+        candidateDistributions = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
+
         while (currentTime < tau && !population.getIndividuals().isEmpty()) {
             List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
             individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
 
-            if (population.getBestIndividual().getComfort() > bestIndividualAllTime.getComfort()) {
-                bestIndividualAllTime = population.getBestIndividual();
+            if (population.getBestIndividual().getComfort() > bestIndividual.getComfort()) {
+                bestIndividual = population.getBestIndividual();
             }
 
-            if (population.getIndividuals().size() >= population.getMaxPopulation()) {
-                population.handleEpidemic();
-                epidemics++;
+            // Update Candidate Distributions
+            List<Individual> newCandidates = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
+            for (Individual individual : candidateDistributions) {
+                newCandidates.add(individual);
             }
+            newCandidates.sort(Comparator.comparingDouble(Individual::getComfort).reversed());
+            Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
+            candidateDistributions = newCandidates.stream()
+                    .filter(individual -> seenAllocations.add(individual.getAllocation()))
+                    .limit(6)
+                    .collect(Collectors.toList());
 
             if (currentTime > tau) break;
             if (population.getBestIndividual().getComfort() == 1) break;
             currentTime = performEvent(individualsByTime.get(0), currentTime);
             events++;
+
+            if (population.getIndividuals().size() >= population.getMaxPopulation()) {
+                population.handleEpidemic();
+                epidemics++;
+            }
 
             if ((events % observationInterval) == 0 || currentTime >= tau) {
                 outputObservation(currentTime, events, epidemics);
@@ -165,52 +181,30 @@ public class Main {
     }
 
     private void outputObservation(double time, int events, int epidemics) {
-        Individual bestIndividual = population.getBestIndividual();
         System.out.println("Present instant: " + time);
         System.out.println("Number of realized events: " + events);
         System.out.println("Population size: " + population.getIndividuals().size());
         System.out.println("Number of epidemics: " + epidemics);
         System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
-        System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
+        System.out.println("Empire policing time: " + bestIndividual.getPolicingTime());
         System.out.println("Comfort: " + bestIndividual.getComfort());
 
-        int numberOfCandidates = Math.min(5, population.getIndividuals().size() - 1);
+        int numberOfCandidates = Math.min(5, candidateDistributions.size() - 1);
         for (int i = 1; i <= numberOfCandidates; i++) {
-            Individual individual = population.getIndividuals().get(i);
-            System.out.println("otherdist" + i + ": " + formatAllocation(individual.getAllocation()) + " : " + (1 / individual.getComfort()) + " : " + individual.getComfort());
+            Individual individual = candidateDistributions.get(i);
+            System.out.println("otherdist" + i + ": " + formatAllocation(individual.getAllocation()) + " : " + (individual.getPolicingTime()) + " : " + individual.getComfort());
         }
-        double tz = 0;
-        for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
-            double patrolTime = 0;
-            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol)) {
-                patrolTime += system.getTimeForPatrol(patrol.getId());
-            }
-            tz = Math.max(tz, patrolTime);
-        }
-        System.out.println("-tz: " + tz);
         System.out.println();
     }
 
     private void outputFinalObservation(double time, int events, int epidemics) {
-        Individual bestIndividual = population.getBestIndividual();
         System.out.println("Final instant: " + time);
         System.out.println("Total events: " + events);
         System.out.println("Final population size: " + population.getIndividuals().size());
         System.out.println("Total number of epidemics: " + epidemics);
         System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
-        System.out.println("Empire policing time: " + (1 / bestIndividual.getComfort()));
+        System.out.println("Empire policing time: " + (bestIndividual.getPolicingTime()));
         System.out.println("Final comfort: " + bestIndividual.getComfort());
-        System.out.println("Comfort All Time: " + bestIndividualAllTime.getComfort());
-
-        double tz = 0;
-        for (Patrol patrol : bestIndividual.getAllocation().keySet()) {
-            double patrolTime = 0;
-            for (PlanetarySystem system : bestIndividual.getAllocation().get(patrol)) {
-                patrolTime += system.getTimeForPatrol(patrol.getId());
-            }
-            tz = Math.max(tz, patrolTime);
-        }
-        System.out.println("-tz: " + tz);
         System.out.println();
     }
     
@@ -282,7 +276,6 @@ public class Main {
 
         List<PlanetarySystem> systems = new ArrayList<>(m);
         for (int i = 0; i < m; i++) {
-
             int[] patrol_times = new int[C.length];
             for (int j = 0; j < C.length; j++) {
                 patrol_times[j] = C[j][i];
