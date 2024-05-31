@@ -64,31 +64,47 @@ public class Population{
         }
         this.individuals = survivors;
     }
-
+    /**
+     * Gets the list of individuals in the population.
+     *
+     * @return The list of individuals.
+     */
     public List<Individual> getIndividuals() {
         return individuals;
     }
 
+    /**
+     * Finds and returns the best individual in the population based on comfort level.
+     * 
+     * @return The best individual.
+     */
     public Individual getBestIndividual() {
-        // a stream is a sequence of elements supporting sequential and parallel aggregate operations
-        // orElse() returns the value if present, otherwise returns the default value
         return individuals.stream()
                           .max(Comparator.comparingDouble(Individual::getComfort))
                           .orElse(null);
     }
 
+    /**
+     * Gets a list of candidate distributions from the population.
+     * 
+     * @param count The number of candidate distributions to retrieve.
+     * @return A list of candidate distributions.
+     */
     public List<Individual> getCandidateDistributions(int count) {
-    // Use a set to keep track of allocations we've already seen
-    Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
+        Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
 
-    // Stream, sort, filter, and collect the top 'count' individuals with unique allocations
-    return individuals.stream()
-                        .sorted(Comparator.comparingDouble(Individual::getComfort).reversed())
-                        .filter(individual -> seenAllocations.add(individual.getAllocation()))
-                        .limit(count)
-                        .collect(Collectors.toList());
+        return individuals.stream()
+                            .sorted(Comparator.comparingDouble(Individual::getComfort).reversed())
+                            .filter(individual -> seenAllocations.add(individual.getAllocation()))
+                            .limit(count)
+                            .collect(Collectors.toList());
     }
-
+    
+    /**
+     * Gets the maximum population size allowed.
+     * 
+     * @return The maximum population size.
+     */
     public int getMaxPopulation() {
         return maxPopulation;
     }

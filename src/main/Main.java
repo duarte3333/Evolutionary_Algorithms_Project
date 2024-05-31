@@ -182,8 +182,14 @@ public class Main {
 
     }
 
-        // outputFinalObservation(currentTime, events, epidemics);
-
+    /**
+     * Outputs observation details to the console.
+     *
+     * @param time             The present instant.
+     * @param events           The number of realized events.
+     * @param epidemics        The number of epidemics.
+     * @param observation_number The observation number.
+     */
     private void outputObservation(double time, int events, int epidemics, int observation_number) {
         System.out.println("Observation number: " + observation_number);
         System.out.println("Present instant: " + time);
@@ -202,6 +208,12 @@ public class Main {
         System.out.println();
     }
 
+    /**
+     * Formats the allocation map into a string representation.
+     * 
+     * @param allocation The allocation map to format.
+     * @return A string representation of the allocation.
+     */
     private String formatAllocation(Map<Patrol, List<PlanetarySystem>> allocation) {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
@@ -230,13 +242,18 @@ public class Main {
         return sb.toString();
     }
 
+    /**
+     * Updates the best individual if the current best individual has a higher comfort level.
+     */
     private void updateBestIndividual() {
         Individual currentBest = population.getBestIndividual();
         if (currentBest.getComfort() > bestIndividual.getComfort()) {
             bestIndividual = currentBest;
         }
     }
-
+    /**
+     * Updates the candidate distributions by selecting the top 6 unique individuals from the population's candidate distributions.
+     */
     private void updateCandidateDistributions() {
         List<Individual> newCandidates = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
         for (Individual individual : candidateDistributions) {
@@ -251,32 +268,51 @@ public class Main {
                 .limit(6)
                 .collect(Collectors.toList());
     }
-
+    /**
+     * Gets the next individual based on their time.
+     * 
+     * @return The next individual.
+     */
     private Individual getNextIndividual(){
         List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
         individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
         return individualsByTime.get(0);
     }
     
-
+    /**
+     * Returns the population.
+     * 
+     * @return The population.
+     */
     public Population getPopulation() {
         return population;
     }
 
+    /**
+     * Returns the list of patrols.
+     * 
+     * @return The list of patrols.
+     */
     public List<Patrol> getPatrols() {
         return patrols;
     }
 
+    /**
+     * Returns the list of planetary systems.
+     * 
+     * @return The list of planetary systems.
+     */
     public List<PlanetarySystem> getSystems() {
         return systems;
     }
-
+    /**
+     * Returns the minimum time.
+     * 
+     * @return The minimum time.
+     */
     public double getTmin() {
         return t_min;
     }
-
-    //java -jar project.jar      -r     n m  τ    ν νmax μ ρ δ
-    //java -jar MyJarProject.jar -r     3 6  1000 4 0.1  1 1 1
     public static void main(String[] args) {
         Parser parser = Parser.getInstance(args);
 
