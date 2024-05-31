@@ -169,10 +169,19 @@ public class Main {
 
             individualsByTime = new ArrayList<>(population.getIndividuals());
             individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+
+            // print last observation before current time > tau
+            if (individualsByTime.get(0).getTime() > tau){
+                outputObservation(currentTime, events, epidemics, observation_number);
+            }
+
             currentTime = individualsByTime.get(0).getTime();
             }
 
-        outputObservation(currentTime, events, epidemics, observation_number);
+        if (population.getIndividuals().isEmpty() && bestIndividual.getComfort() ==1){
+            outputObservation(currentTime, events, epidemics, observation_number);
+        }
+
     }
 
         // outputFinalObservation(currentTime, events, epidemics);
