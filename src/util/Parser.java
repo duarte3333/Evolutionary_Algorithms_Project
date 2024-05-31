@@ -37,6 +37,11 @@ public class Parser {
         return instance;
     }
 
+    /**
+     * Reads input parameters from a file.
+     * 
+     * @param filePath The path to the input file.
+     */
     private void readFromFile(String filePath) {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             n = scanner.nextInt();
@@ -58,6 +63,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Reads input parameters from the command line arguments.
+     * 
+     * @param args The command line arguments.
+     */
     private void readFromCommandLine(String[] args) {
         n = Integer.parseInt(args[1]);
         m = Integer.parseInt(args[2]);
@@ -69,7 +79,14 @@ public class Parser {
         delta = Double.parseDouble(args[8]);
         C = generateRandomMatrix(n, m);
     }
-
+    
+    /**
+     * Generates a random matrix of size n by m.
+     * 
+     * @param n The number of rows in the matrix.
+     * @param m The number of columns in the matrix.
+     * @return A random matrix.
+     */
     private int[][] generateRandomMatrix(int n, int m) {
         int[][] matrix = new int[n][m];
         for (int i = 0; i < n; i++) {
