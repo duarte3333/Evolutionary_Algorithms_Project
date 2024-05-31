@@ -142,13 +142,12 @@ public class Main {
         bestIndividual = population.getBestIndividual();
         candidateDistributions = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
 
-        List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
-        individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
-        currentTime = individualsByTime.get(0).getTime();
+        Individual nextIndividual = getNextIndividual();
+        currentTime = nextIndividual.getTime();
 
         while ( currentTime < tau && !(population.getIndividuals().isEmpty()) && bestIndividual.getComfort() <1) {
 
-            performEvent(individualsByTime.get(0), currentTime);
+            performEvent(nextIndividual, currentTime);
             events++;
 
             if (population.getIndividuals().size() >= population.getMaxPopulation()) {
@@ -167,15 +166,14 @@ public class Main {
                 observation_number += 1;
             }
 
-            individualsByTime = new ArrayList<>(population.getIndividuals());
-            individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+            nextIndividual = getNextIndividual();
 
             // print last observation before current time > tau
-            if (individualsByTime.get(0).getTime() > tau){
+            if (nextIndividual.getTime() > tau){
                 outputObservation(currentTime, events, epidemics, observation_number);
             }
 
-            currentTime = individualsByTime.get(0).getTime();
+            currentTime = nextIndividual.getTime();
             }
 
         if (population.getIndividuals().isEmpty() && bestIndividual.getComfort() ==1){
@@ -252,6 +250,12 @@ public class Main {
                 .filter(individual -> seenAllocations.add(individual.getAllocation()))
                 .limit(6)
                 .collect(Collectors.toList());
+    }
+
+    private Individual getNextIndividual(){
+        List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
+        individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+        return individualsByTime.get(0);
     }
     
 
