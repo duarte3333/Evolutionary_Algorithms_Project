@@ -82,6 +82,16 @@ public class Individual {
     }
 
     /**
+     * Set policing time of the individual.
+     *
+     * @param policing_time The time to policy the system.
+     */
+    public void setPolicingTime(int policing_time) {
+        this.policing_time =  policing_time;
+    }
+
+
+    /**
      * Gets the comfort of the individual.
      *
      * @return The comfort of the individual.
@@ -91,11 +101,20 @@ public class Individual {
     }
 
     /**
+     * Set confort of the individual.
+     *
+     * @param confort The comfort of the individual.
+     */
+    public void setComfort(double comfort) {
+        this.comfort =  comfort;
+    }
+
+    /**
      * Calculates the time it takes the individual to patrol the empire.
      *
      * @return The time to patrol the empire of the individual.
      */
-    private int calculatePolicingTime() {
+    public int calculatePolicingTime() {
         int tz = 0;
         for (Patrol patrol : allocation.keySet()) {
             int patrolTime = 0;
@@ -112,7 +131,7 @@ public class Individual {
      *
      * @return The comfort of the individual.
      */
-    private double calculateComfort() {
+    public double calculateComfort() {
         int tz = policing_time;
         return tmin / tz;
     }

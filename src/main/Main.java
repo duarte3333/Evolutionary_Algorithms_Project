@@ -118,10 +118,9 @@ public class Main {
      * @param currentTime The current time in the simulation.
      * @return The time at which the event occurred.
      */
-    public double performEvent(Individual individual, double currentTime) {
+    public void performEvent(Individual individual, double currentTime) {
         Event event = individual.getEvent();
         event.execute(individual, currentTime, this);
-        return individual.getTime();
     }
 
     /**
@@ -132,7 +131,8 @@ public class Main {
         int events = 0;
         int epidemics = 0;
         double currentTime = 0.0;
-        int observationInterval = Math.max(1, tau / 20);
+        double observationInterval = tau / 20.0;
+        int observation_number = 1;
 
         //give me an alternative
         for (Individual individual : population.getIndividuals()) {
@@ -142,45 +142,43 @@ public class Main {
         bestIndividual = population.getBestIndividual();
         candidateDistributions = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
 
-        while (currentTime < tau && !population.getIndividuals().isEmpty()) {
-            List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
-            individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+        List<Individual> individualsByTime = new ArrayList<>(population.getIndividuals());
+        individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+        currentTime = individualsByTime.get(0).getTime();
 
-            if (population.getBestIndividual().getComfort() > bestIndividual.getComfort()) {
-                bestIndividual = population.getBestIndividual();
-            }
+        while ( currentTime < tau && !(population.getIndividuals().isEmpty()) && bestIndividual.getComfort() <1) {
 
-            // Update Candidate Distributions
-            List<Individual> newCandidates = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
-            for (Individual individual : candidateDistributions) {
-                newCandidates.add(individual);
-            }
-            newCandidates.sort(Comparator.comparingDouble(Individual::getComfort).reversed());
-            Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
-            candidateDistributions = newCandidates.stream()
-                    .filter(individual -> seenAllocations.add(individual.getAllocation()))
-                    .limit(6)
-                    .collect(Collectors.toList());
-
-            if (currentTime > tau) break;
-            if (population.getBestIndividual().getComfort() == 1) break;
-            currentTime = performEvent(individualsByTime.get(0), currentTime);
+            performEvent(individualsByTime.get(0), currentTime);
             events++;
 
             if (population.getIndividuals().size() >= population.getMaxPopulation()) {
                 population.handleEpidemic();
                 epidemics++;
             }
-
-            if ((events % observationInterval) == 0 || currentTime >= tau) {
-                outputObservation(currentTime, events, epidemics);
+            if (population.getIndividuals().isEmpty()){
+                break;
             }
-        }
+            
+            updateBestIndividual();
+            updateCandidateDistributions();
 
-        outputFinalObservation(currentTime, events, epidemics);
+            if ((currentTime >= observation_number * observationInterval)) {
+                outputObservation(currentTime, events, epidemics, observation_number);
+                observation_number += 1;
+            }
+
+            individualsByTime = new ArrayList<>(population.getIndividuals());
+            individualsByTime.sort(Comparator.comparingDouble(Individual::getTime));
+            currentTime = individualsByTime.get(0).getTime();
+            }
+
+        outputObservation(currentTime, events, epidemics, observation_number);
     }
 
-    private void outputObservation(double time, int events, int epidemics) {
+        // outputFinalObservation(currentTime, events, epidemics);
+
+    private void outputObservation(double time, int events, int epidemics, int observation_number) {
+        System.out.println("Observation number: " + observation_number);
         System.out.println("Present instant: " + time);
         System.out.println("Number of realized events: " + events);
         System.out.println("Population size: " + population.getIndividuals().size());
@@ -196,18 +194,6 @@ public class Main {
         }
         System.out.println();
     }
-
-    private void outputFinalObservation(double time, int events, int epidemics) {
-        System.out.println("Final instant: " + time);
-        System.out.println("Total events: " + events);
-        System.out.println("Final population size: " + population.getIndividuals().size());
-        System.out.println("Total number of epidemics: " + epidemics);
-        System.out.println("Best distribution of the patrols: " + formatAllocation(bestIndividual.getAllocation()));
-        System.out.println("Empire policing time: " + (bestIndividual.getPolicingTime()));
-        System.out.println("Final comfort: " + bestIndividual.getComfort());
-        System.out.println();
-    }
-    
 
     private String formatAllocation(Map<Patrol, List<PlanetarySystem>> allocation) {
         StringBuilder sb = new StringBuilder();
@@ -235,6 +221,28 @@ public class Main {
         }
         sb.append("}");
         return sb.toString();
+    }
+
+    private void updateBestIndividual() {
+        Individual currentBest = population.getBestIndividual();
+        if (currentBest.getComfort() > bestIndividual.getComfort()) {
+            bestIndividual = currentBest;
+        }
+    }
+
+    private void updateCandidateDistributions() {
+        List<Individual> newCandidates = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
+        for (Individual individual : candidateDistributions) {
+            newCandidates.add(individual);
+        }
+
+        newCandidates.sort(Comparator.comparingDouble(Individual::getComfort).reversed());
+        
+        Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
+        candidateDistributions = newCandidates.stream()
+                .filter(individual -> seenAllocations.add(individual.getAllocation()))
+                .limit(6)
+                .collect(Collectors.toList());
     }
     
 

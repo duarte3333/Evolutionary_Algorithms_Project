@@ -48,7 +48,15 @@ public class MutateEvent extends Event {
             }
             Patrol newPatrol = patrols.get(newPatrolIndex);
             individual.getAllocation().get(newPatrol).add(system);
+
+            int new_policing_time = individual.calculatePolicingTime();
+            individual.setPolicingTime(new_policing_time);
+
+            double new_comfort = individual.calculateComfort();
+            individual.setComfort(new_comfort);
         }
+
         main.setNextEvent(currentTime, individual);
+
     }
 }

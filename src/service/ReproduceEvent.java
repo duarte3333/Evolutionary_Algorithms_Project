@@ -57,5 +57,6 @@ public class ReproduceEvent extends Event {
         main.getPopulation().addIndividual(newIndividual);
         main.setNextEvent(currentTime, newIndividual);
         main.setNextEvent(currentTime, individual);
+
     }
 }

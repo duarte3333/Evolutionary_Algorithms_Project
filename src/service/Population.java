@@ -63,7 +63,6 @@ public class Population{
             }
         }
         this.individuals = survivors;
-        System.out.println("Number of survivors: " + individuals.size());
     }
 
     public List<Individual> getIndividuals() {
