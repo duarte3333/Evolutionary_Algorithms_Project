@@ -127,6 +127,24 @@ public class Individual {
     }
 
     /**
+     * Creates a deep copy of this individual.
+     *
+     * @return A deep copy of this individual.
+     */
+    public Individual deepCopy() {
+        Map<Patrol, List<PlanetarySystem>> allocationCopy = new HashMap<>();
+        for (Map.Entry<Patrol, List<PlanetarySystem>> patrol : allocation.entrySet()) {
+            Patrol patrolCopy = patrol.getKey();
+            List<PlanetarySystem> systemsCopy = new ArrayList<>(patrol.getValue());
+            allocationCopy.put(patrolCopy, systemsCopy);
+        }
+        Individual copy = new Individual(allocationCopy, tmin);
+
+        return copy;
+    }
+
+
+    /**
      * Calculates the comfort of the individual.
      *
      * @return The comfort of the individual.

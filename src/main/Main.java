@@ -139,13 +139,16 @@ public class Main {
             setNextEvent(currentTime, individual);
         }
         
-        bestIndividual = population.getBestIndividual();
-        candidateDistributions = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
+        bestIndividual = population.getBestIndividual().deepCopy();
+        candidateDistributions = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size()))
+                                          .stream()
+                                          .map(Individual::deepCopy)
+                                          .collect(Collectors.toList());// 5 candidates + best
 
         Individual nextIndividual = getNextIndividual();
         currentTime = nextIndividual.getTime();
 
-        while ( currentTime < tau && !(population.getIndividuals().isEmpty()) && bestIndividual.getComfort() <1) {
+        while ( !(currentTime >= tau || (population.getIndividuals().isEmpty()) || bestIndividual.getComfort() >= 1)) {
 
             performEvent(nextIndividual, currentTime);
             events++;
@@ -154,21 +157,33 @@ public class Main {
                 population.handleEpidemic();
                 epidemics++;
             }
-            if (population.getIndividuals().isEmpty()){
+            if (population.getIndividuals().isEmpty()){ 
                 break;
             }
-            
+
             updateBestIndividual();
+
+            if (!(bestIndividual.getPolicingTime() == bestIndividual.calculatePolicingTime())) {
+                System.out.println("******************Error in the best");
+            }
+
             updateCandidateDistributions();
 
+            for (Individual candidate : candidateDistributions) {
+                if (!(candidate.getPolicingTime() == candidate.calculatePolicingTime())) {
+                    System.out.println("******************Error in candidate distribution");
+                }
+            }
+
+            nextIndividual = getNextIndividual();
+
+            // printing at approx. tau/20
             if ((currentTime >= observation_number * observationInterval)) {
                 outputObservation(currentTime, events, epidemics, observation_number);
                 observation_number += 1;
             }
 
-            nextIndividual = getNextIndividual();
-
-            // print last observation before current time > tau
+            // printing output for the last population
             if (nextIndividual.getTime() > tau){
                 outputObservation(currentTime, events, epidemics, observation_number);
             }
@@ -176,7 +191,7 @@ public class Main {
             currentTime = nextIndividual.getTime();
             }
 
-        if (population.getIndividuals().isEmpty() && bestIndividual.getComfort() ==1){
+        if (population.getIndividuals().isEmpty() || bestIndividual.getComfort() ==1){
             outputObservation(currentTime, events, epidemics, observation_number);
         }
 
@@ -201,7 +216,7 @@ public class Main {
         System.out.println("Comfort: " + bestIndividual.getComfort());
 
         int numberOfCandidates = Math.min(5, candidateDistributions.size() - 1);
-        for (int i = 1; i <= numberOfCandidates; i++) {
+        for (int i = 1; i <= numberOfCandidates; i++) { // start at i=1 to ignore the best
             Individual individual = candidateDistributions.get(i);
             System.out.println("otherdist" + i + ": " + formatAllocation(individual.getAllocation()) + " : " + (individual.getPolicingTime()) + " : " + individual.getComfort());
         }
@@ -229,7 +244,7 @@ public class Main {
             }
             firstPatrol = false;
             sb.append("{");
-            sb.append(entry.getKey().getId()).append(": ");
+            // sb.append(entry.getKey().getId()).append(": ");
             for (int i = 0; i < entry.getValue().size(); i++) {
                 if (i > 0) {
                     sb.append(",");
@@ -248,25 +263,30 @@ public class Main {
     private void updateBestIndividual() {
         Individual currentBest = population.getBestIndividual();
         if (currentBest.getComfort() > bestIndividual.getComfort()) {
-            bestIndividual = currentBest;
+            bestIndividual = currentBest.deepCopy();
         }
     }
     /**
      * Updates the candidate distributions by selecting the top 6 unique individuals from the population's candidate distributions.
      */
     private void updateCandidateDistributions() {
-        List<Individual> newCandidates = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1));
+        List<Individual> newCandidates = population.getCandidateDistributions(Math.min(6, population.getIndividuals().size() - 1))
+                                                    .stream()
+                                                    .map(Individual::deepCopy)
+                                                    .collect(Collectors.toList());
+    
         for (Individual individual : candidateDistributions) {
-            newCandidates.add(individual);
+            newCandidates.add(individual.deepCopy());
         }
-
+    
         newCandidates.sort(Comparator.comparingDouble(Individual::getComfort).reversed());
         
         Set<Map<Patrol, List<PlanetarySystem>>> seenAllocations = new HashSet<>();
         candidateDistributions = newCandidates.stream()
-                .filter(individual -> seenAllocations.add(individual.getAllocation()))
-                .limit(6)
-                .collect(Collectors.toList());
+                                              .filter(individual -> seenAllocations.add(individual.getAllocation()))
+                                              .limit(6)
+                                              .map(Individual::deepCopy)
+                                              .collect(Collectors.toList());
     }
     /**
      * Gets the next individual based on their time.
@@ -333,11 +353,13 @@ public class Main {
 
         List<PlanetarySystem> systems = new ArrayList<>(m);
         for (int i = 0; i < m; i++) {
-            int[] patrol_times = new int[C.length];
-            for (int j = 0; j < C.length; j++) {
+            int[] patrol_times = new int[n];
+            for (int j = 0; j < n; j++) {
                 patrol_times[j] = C[j][i];
             }
+
             systems.add(new PlanetarySystem(i, patrol_times));
+
         }
 
         Main algorithm = Main.getInstance(patrols, systems, tau, nu, nuMax, mu, rho, delta);

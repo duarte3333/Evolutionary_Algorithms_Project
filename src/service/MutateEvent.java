@@ -47,6 +47,7 @@ public class MutateEvent extends Event {
                 newPatrolIndex = random.nextInt(patrols.size());
             }
             Patrol newPatrol = patrols.get(newPatrolIndex);
+
             individual.getAllocation().get(newPatrol).add(system);
 
             int new_policing_time = individual.calculatePolicingTime();
