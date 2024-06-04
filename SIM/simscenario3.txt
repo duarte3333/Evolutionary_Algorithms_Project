@@ -1,279 +1,529 @@
 Observation number: 1
-Present instant: 50.08676274735646
-Number of realized events: 439
-Population size: 19
-Number of epidemics: 5
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.40975609756097564
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{7}, {8}, {6}, {5}, {}, {}, {0}, {4,2,1}, {9}, {3}} : 49.0 : 0.34285714285714286
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 0.6331367796106945
+Number of realized events: 9
+Population size: 8
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist3: {{}, {2,3}, {0,1}} : 5.0 : 0.4666666666666667
+otherdist4: {{1}, {2,3}, {0}} : 5.0 : 0.4666666666666667
+otherdist5: {{3}, {2,1}, {0}} : 6.0 : 0.3888888888888889
 
 Observation number: 2
-Present instant: 100.240777397631
-Number of realized events: 797
-Population size: 19
-Number of epidemics: 9
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.42000000000000004
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{4,3}, {}, {}, {9}, {7}, {0}, {6}, {1}, {5,8,2}, {}} : 53.0 : 0.31698113207547174
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 1.0554927900735447
+Number of realized events: 19
+Population size: 9
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist3: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist4: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
+otherdist5: {{}, {2,3}, {0,1}} : 5.0 : 0.4666666666666667
 
 Observation number: 3
-Present instant: 150.11579194574463
-Number of realized events: 1233
-Population size: 33
-Number of epidemics: 14
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.42000000000000004
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{9}, {}, {}, {}, {}, {1}, {4}, {7,8,3,6,5}, {0}, {2}} : 45.0 : 0.37333333333333335
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 1.5409147551156956
+Number of realized events: 23
+Population size: 7
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist3: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist4: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
+otherdist5: {{}, {2,3}, {0,1}} : 5.0 : 0.4666666666666667
 
 Observation number: 4
-Present instant: 200.01473516978353
-Number of realized events: 1553
-Population size: 27
-Number of epidemics: 18
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.42000000000000004
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{}, {}, {2}, {5}, {}, {7,1}, {6,8,4,0}, {}, {3}, {9}} : 45.0 : 0.37333333333333335
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 2.146383601747147
+Number of realized events: 27
+Population size: 8
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist3: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist4: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist5: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
 
 Observation number: 5
-Present instant: 250.33899037533467
-Number of realized events: 1959
-Population size: 33
-Number of epidemics: 23
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.42000000000000004
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{}, {}, {}, {}, {5}, {0,2,8,1}, {}, {7}, {6,4,3}, {9}} : 49.0 : 0.34285714285714286
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 2.555687401641098
+Number of realized events: 33
+Population size: 7
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist3: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist4: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist5: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
 
 Observation number: 6
-Present instant: 300.1045771883587
-Number of realized events: 2338
-Population size: 18
-Number of epidemics: 28
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.42000000000000004
-otherdist1: {{2,1}, {0,6}, {3}, {}, {}, {8}, {}, {}, {9}, {7,5,4}} : 44.0 : 0.38181818181818183
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 3.136675458566005
+Number of realized events: 36
+Population size: 6
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist3: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist4: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist5: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
 
 Observation number: 7
-Present instant: 350.19473675100477
-Number of realized events: 2756
-Population size: 8
-Number of epidemics: 33
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{8}, {7}, {3}, {0,1}, {4,5}, {2}, {9}, {}, {6}, {}} : 48.0 : 0.35000000000000003
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 3.5343301984053275
+Number of realized events: 39
+Population size: 6
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist3: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist4: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist5: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
 
 Observation number: 8
-Present instant: 400.16021185728954
-Number of realized events: 3133
-Population size: 32
-Number of epidemics: 37
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{7}, {}, {3}, {9,4}, {5,0}, {}, {1}, {}, {6}, {8,2}} : 51.0 : 0.32941176470588235
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 4.009687448059031
+Number of realized events: 45
+Population size: 3
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist3: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist4: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
+otherdist5: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
 
 Observation number: 9
-Present instant: 450.0705994677884
-Number of realized events: 3456
-Population size: 14
-Number of epidemics: 41
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{3,9}, {}, {5}, {8,6,0}, {7}, {}, {}, {1}, {}, {4,2}} : 46.0 : 0.3652173913043478
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 4.8061872581204375
+Number of realized events: 48
+Population size: 4
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{1}, {0,2}, {3}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
+otherdist3: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist4: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist5: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
 
 Observation number: 10
-Present instant: 500.2308880194319
-Number of realized events: 3941
-Population size: 30
-Number of epidemics: 47
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{}, {4,5}, {}, {1}, {}, {8,9}, {3,2}, {}, {0}, {6,7}} : 45.0 : 0.37333333333333335
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 5.287616707840493
+Number of realized events: 51
+Population size: 2
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{2}, {0,3}, {1}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
+otherdist3: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist4: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist5: {{1,0}, {2}, {3}} : 5.0 : 0.4666666666666667
 
 Observation number: 11
-Present instant: 550.2894077312548
-Number of realized events: 4342
-Population size: 12
-Number of epidemics: 52
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{2}, {1}, {9}, {3}, {6,8,0}, {5}, {7}, {}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 5.530900810852489
+Number of realized events: 53
+Population size: 0
+Number of epidemics: 0
+Best distribution of the patrols: {{1}, {0,2}, {3}}
+Empire policing time: 4.0
+Comfort: 0.5833333333333334
+otherdist1: {{2}, {0,3}, {1}} : 4.0 : 0.5833333333333334
+otherdist2: {{1}, {0}, {2,3}} : 5.0 : 0.4666666666666667
+otherdist3: {{1}, {0}, {3,2}} : 5.0 : 0.4666666666666667
+otherdist4: {{0}, {2,3}, {1}} : 5.0 : 0.4666666666666667
+otherdist5: {{1,0}, {2}, {3}} : 5.0 : 0.46666666666javac -d bin src/main/*.java
+>> jar cvfm MyJarProject.jar manifest.txt -C bin .
+>> java -jar MyJarProject.jar -f ./SIM/input2.txt
+added manifest
+adding: src/(in = 0) (out= 0)(stored 0%)
+adding: src/main/(in = 0) (out= 0)(stored 0%)
+adding: src/main/Main.class(in = 10323) (out= 5017)(deflated 51%)
+adding: src/model/(in = 0) (out= 0)(stored 0%)
+adding: src/model/Individual.class(in = 2745) (out= 1375)(deflated 49%)
+adding: src/model/Patrol.class(in = 819) (out= 462)(deflated 43%)
+adding: src/model/PlanetarySystem.class(in = 1119) (out= 617)(deflated 44%)
+adding: src/service/(in = 0) (out= 0)(stored 0%)
+adding: src/service/DeathEvent.class(in = 538) (out= 350)(deflated 34%)
+adding: src/service/Event.class(in = 366) (out= 276)(deflated 24%)
+adding: src/service/EventFactory.class(in = 1077) (out= 670)(deflated 37%)
+adding: src/service/EventType.class(in = 1012) (out= 563)(deflated 44%)
+adding: src/service/MutateEvent.class(in = 1379) (out= 838)(deflated 39%)
+adding: src/service/Population.class(in = 3455) (out= 1606)(deflated 53%)
+adding: src/service/ReproduceEvent.class(in = 2028) (out= 1155)(deflated 43%)
+adding: src/util/(in = 0) (out= 0)(stored 0%)
+adding: src/util/Parser.class(in = 3218) (out= 1752)(deflated 45%)
+Observation number: 1
+Present instant: 7.595516675732201
+Number of realized events: 87
+Population size: 21
+Number of epidemics: 0
+Best distribution of the patrols: {{}, {1}, {2}, {0,3}}
+Empire policing time: 15.0
+Comfort: 0.06666666666666667
+otherdist1: {{}, {1}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist2: {{1}, {2}, {}, {0,3}} : 17.0 : 0.058823529411764705
+otherdist3: {{1}, {2}, {0}, {3}} : 17.0 : 0.058823529411764705
+otherdist4: {{}, {}, {2,1}, {0,3}} : 20.0 : 0.05
+otherdist5: {{}, {}, {1,2}, {0,3}} : 20.0 : 0.05
+
+Observation number: 2
+Present instant: 15.017680428563786
+Number of realized events: 226
+Population size: 62
+Number of epidemics: 0
+Best distribution of the patrols: {{}, {1}, {0,2}, {3}}
+Empire policing time: 14.0
+Comfort: 0.07142857142857142
+otherdist1: {{1}, {}, {2,0}, {3}} : 15.0 : 0.06666666666666667
+otherdist2: {{1}, {}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist3: {{}, {1}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist4: {{1}, {2}, {}, {0,3}} : 17.0 : 0.058823529411764705
+otherdist5: {{1}, {2}, {0}, {3}} : 17.0 : 0.058823529411764705
+
+Observation number: 3
+Present instant: 22.526519016129125
+Number of realized events: 365
+Population size: 13
+Number of epidemics: 1
+Best distribution of the patrols: {{}, {1}, {0,2}, {3}}
+Empire policing time: 14.0
+Comfort: 0.07142857142857142
+otherdist1: {{1}, {}, {2,0}, {3}} : 15.0 : 0.06666666666666667
+otherdist2: {{1}, {}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist3: {{}, {1}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist4: {{1,0}, {2}, {}, {3}} : 17.0 : 0.058823529411764705
+otherdist5: {{1}, {2}, {}, {0,3}} : 17.0 : 0.058823529411764705
+
+Observation number: 4
+Present instant: 28.638258944418638
+Number of realized events: 433
+Population size: 46
+Number of epidemics: 1
+Best distribution of the patrols: {{0}, {1}, {2}, {3}}
+Empire policing time: 1.0
+Comfort: 1.0
+otherdist1: {{}, {1}, {0,2}, {3}} : 14.0 : 0.07142857142857142
+otherdist2: {{1}, {}, {2,0}, {3}} : 15.0 : 0.06666666666666667
+otherdist3: {{1}, {}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist4: {{}, {1}, {2}, {0,3}} : 15.0 : 0.06666666666666667
+otherdist5: {{0,1}, {}, {2}, {3}} : 16.0 : 0.0625
+
+PS C:\Users\vasco\Evolutionary_Algorithms_Project> javac -d bin src/main/*.java
+>> jar cvfm MyJarProject.jar manifest.txt -C bin .
+>> java -jar MyJarProject.jar -f ./SIM/input3.txt 
+added manifest
+adding: src/(in = 0) (out= 0)(stored 0%)
+adding: src/main/(in = 0) (out= 0)(stored 0%)
+adding: src/main/Main.class(in = 10323) (out= 5017)(deflated 51%)
+adding: src/model/(in = 0) (out= 0)(stored 0%)
+adding: src/model/Individual.class(in = 2745) (out= 1375)(deflated 49%)
+adding: src/model/Patrol.class(in = 819) (out= 462)(deflated 43%)
+adding: src/model/PlanetarySystem.class(in = 1119) (out= 617)(deflated 44%)
+adding: src/service/(in = 0) (out= 0)(stored 0%)
+adding: src/service/DeathEvent.class(in = 538) (out= 350)(deflated 34%)
+adding: src/service/Event.class(in = 366) (out= 276)(deflated 24%)
+adding: src/service/EventFactory.class(in = 1077) (out= 670)(deflated 37%)
+adding: src/service/EventType.class(in = 1012) (out= 563)(deflated 44%)
+adding: src/service/MutateEvent.class(in = 1379) (out= 838)(deflated 39%)
+adding: src/service/Population.class(in = 3455) (out= 1606)(deflated 53%)
+adding: src/service/ReproduceEvent.class(in = 2028) (out= 1155)(deflated 43%)
+adding: src/util/(in = 0) (out= 0)(stored 0%)
+adding: src/util/Parser.class(in = 3218) (out= 1752)(deflated 45%)
+Observation number: 1
+Present instant: 25.001512684617918
+Number of realized events: 6116
+Population size: 545
+Number of epidemics: 2
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{}, {3,6}, {4,5}, {1}, {}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist2: {{6}, {3}, {4,5}, {1}, {}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist3: {{0}, {1}, {3,4}, {6}, {}, {5}, {2}} : 22.0 : 0.36363636363636365
+otherdist4: {{4,2}, {3}, {5}, {}, {1}, {0}, {6}} : 22.0 : 0.36363636363636365
+otherdist5: {{6}, {1,3}, {0}, {}, {4}, {5}, {2}} : 22.0 : 0.36363636363636365
+
+Observation number: 2
+Present instant: 50.00769129721141
+Number of realized events: 13377
+Population size: 691
+Number of epidemics: 5
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{0}, {3,1}, {2,4,5}, {6}, {}, {}, {}} : 22.0 : 0.36363636363636365
+otherdist2: {{6}, {}, {2,3}, {1}, {5}, {0}, {4}} : 22.0 : 0.36363636363636365
+otherdist3: {{}, {3,6}, {4,5}, {1}, {}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist4: {{6}, {3}, {4,5}, {1}, {}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist5: {{0}, {1}, {3,4}, {6}, {}, {5}, {2}} : 22.0 : 0.36363636363636365
+
+Observation number: 3
+Present instant: 75.00985423382228
+Number of realized events: 21075
+Population size: 123
+Number of epidemics: 9
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{0}, {3,6}, {5}, {}, {1}, {2}, {4}} : 22.0 : 0.36363636363636365
+otherdist2: {{}, {0}, {3,4}, {5}, {1}, {2}, {6}} : 22.0 : 0.36363636363636365
+otherdist3: {{}, {1}, {2,3}, {6}, {4}, {5}, {0}} : 22.0 : 0.36363636363636365
+otherdist4: {{0}, {3,1}, {2,4,5}, {6}, {}, {}, {}} : 22.0 : 0.36363636363636365
+otherdist5: {{6}, {}, {2,3}, {1}, {5}, {0}, {4}} : 22.0 : 0.36363636363636365
+
+Observation number: 4
+Present instant: 100.00133684828316
+Number of realized events: 28078
+Population size: 235
+Number of epidemics: 12
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{}, {0}, {2,3}, {6}, {1}, {5}, {4}} : 22.0 : 0.36363636363636365
+otherdist2: {{4}, {6,3}, {2}, {1}, {}, {5}, {0}} : 22.0 : 0.36363636363636365
+otherdist3: {{2,0}, {3}, {4}, {1}, {}, {5}, {6}} : 22.0 : 0.36363636363636365
+otherdist4: {{0}, {3,6}, {}, {5}, {1}, {2}, {4}} : 22.0 : 0.36363636363636365
+otherdist5: {{0}, {3,6}, {5}, {}, {1}, {2}, {4}} : 22.0 : 0.36363636363636365
+
+Observation number: 5
+Present instant: 125.0021798354217
+Number of realized events: 35429
+Population size: 452
+Number of epidemics: 15
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{2}, {6,3}, {}, {5}, {1}, {0}, {4}} : 22.0 : 0.36363636363636365
+otherdist2: {{2,4}, {3,6}, {0}, {5}, {1}, {}, {}} : 22.0 : 0.36363636363636365
+otherdist3: {{0,2}, {3,1}, {}, {6}, {4}, {5}, {}} : 22.0 : 0.36363636363636365
+otherdist4: {{0}, {4}, {3}, {1}, {5}, {2}, {6}} : 22.0 : 0.36363636363636365
+otherdist5: {{0}, {1}, {4,3}, {6}, {}, {5}, {2}} : 22.0 : 0.36363636363636365
+
+Observation number: 6
+Present instant: 150.0092430550404
+Number of realized events: 42478
+Population size: 379
+Number of epidemics: 18
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{6}, {0}, {3,4}, {1}, {}, {5}, {2}} : 22.0 : 0.36363636363636365
+otherdist2: {{2,0}, {4}, {3}, {}, {1}, {5}, {6}} : 22.0 : 0.36363636363636365
+otherdist3: {{2}, {0}, {3,4}, {1}, {5}, {}, {6}} : 22.0 : 0.36363636363636365
+otherdist4: {{2}, {6,3}, {}, {5}, {1}, {0}, {4}} : 22.0 : 0.36363636363636365
+otherdist5: {{2,4}, {3,6}, {0}, {5}, {1}, {}, {}} : 22.0 : 0.36363636363636365
+
+Observation number: 7
+Present instant: 175.0072712641443
+Number of realized events: 49579
+Population size: 438
+Number of epidemics: 21
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{}, {6,3}, {4}, {5}, {1}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist2: {{6}, {1,3}, {4}, {5}, {}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist3: {{2,4}, {3}, {0}, {}, {1}, {5}, {6}} : 22.0 : 0.36363636363636365
+otherdist4: {{6}, {1,3}, {2}, {5}, {}, {0}, {4}} : 22.0 : 0.36363636363636365
+otherdist5: {{6}, {0}, {3,4}, {1}, {}, {5}, {2}} : 22.0 : 0.36363636363636365
+
+Observation number: 8
+Present instant: 200.00081549277556
+Number of realized events: 57089
+Population size: 746
+Number of epidemics: 24
+Best distribution of the patrols: {{0}, {1,3}, {4,5}, {}, {}, {2}, {6}}
+Empire policing time: 22.0
+Comfort: 0.36363636363636365
+otherdist1: {{4}, {3,1}, {0}, {6}, {5}, {2}, {}} : 22.0 : 0.36363636363636365
+otherdist2: {{0}, {6}, {5,3}, {1}, {4}, {2}, {}} : 22.0 : 0.36363636363636365
+otherdist3: {{6}, {0}, {5,3}, {1}, {4}, {}, {2}} : 22.0 : 0.36363636363636365
+otherdist4: {{}, {6,3}, {4}, {5}, {1}, {2}, {0}} : 22.0 : 0.36363636363636365
+otherdist5: {{6}, {1,3}, {4}, {5}, {}, {2}, {0}} : 22.0 : 0.36363636363636365
+
+Observation number: 9
+Present instant: 225.00272130569024
+Number of realized events: 64763
+Population size: 254
+Number of epidemics: 28
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{6}, {3}, {5,4,2}, {}, {1}, {}, {0}} : 22.0 : 0.36363636363636365
+otherdist2: {{0}, {3,6}, {4}, {1}, {5}, {2}, {}} : 22.0 : 0.36363636363636365
+otherdist3: {{6}, {4}, {3,2}, {5}, {1}, {}, {0}} : 22.0 : 0.36363636363636365
+otherdist4: {{}, {3,1}, {5,2,4}, {}, {}, {0}, {6}} : 22.0 : 0.36363636363636365
+otherdist5: {{0,2}, {1}, {3,4}, {}, {}, {5}, {6}} : 22.0 : 0.36363636363636365
+
+Observation number: 10
+Present instant: 250.0033933709132
+Number of realized events: 71875
+Population size: 306
+Number of epidemics: 31
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{}, {1}, {3,2}, {6}, {5}, {0}, {4}} : 22.0 : 0.36363636363636365
+otherdist2: {{}, {1,3}, {4,2}, {6}, {}, {5}, {0}} : 22.0 : 0.36363636363636365
+otherdist3: {{4}, {1,3}, {0}, {5}, {}, {2}, {6}} : 22.0 : 0.36363636363636365
+otherdist4: {{6}, {3}, {5,4,2}, {}, {1}, {}, {0}} : 22.0 : 0.36363636363636365
+otherdist5: {{0}, {3,6}, {4}, {1}, {5}, {2}, {}} : 22.0 : 0.36363636363636365
+
+Observation number: 11
+Present instant: 275.00734648818946
+Number of realized events: 78995
+Population size: 438
+Number of epidemics: 34
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{6}, {3}, {4,2}, {5}, {1}, {}, {0}} : 22.0 : 0.36363636363636365
+otherdist3: {{4}, {1,3}, {0}, {6}, {5}, {2}, {}} : 22.0 : 0.36363636363636365
+otherdist4: {{0}, {1,3}, {4,5}, {6}, {}, {2}, {}} : 22.0 : 0.36363636363636365
+otherdist5: {{2}, {6}, {3,4}, {1}, {}, {5}, {0}} : 22.0 : 0.36363636363636365
 
 Observation number: 12
-Present instant: 600.9899648491736
-Number of realized events: 4765
-Population size: 8
-Number of epidemics: 57
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{7}, {4}, {8}, {1}, {}, {6,2}, {}, {5}, {9,0}, {3}} : 44.0 : 0.38181818181818183
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 300.00135911241244
+Number of realized events: 86205
+Population size: 575
+Number of epidemics: 37
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{4,2}, {}, {3}, {1}, {5}, {0}, {6}} : 21.0 : 0.38095238095238093
+otherdist3: {{2}, {6}, {4,3}, {5}, {1}, {}, {0}} : 22.0 : 0.36363636363636365
+otherdist4: {{4}, {3}, {2}, {5}, {1}, {0}, {6}} : 22.0 : 0.36363636363636365
+otherdist5: {{6}, {4}, {2,3}, {1}, {5}, {}, {0}} : 22.0 : 0.36363636363636365
 
 Observation number: 13
-Present instant: 650.127256367462
-Number of realized events: 5053
-Population size: 21
-Number of epidemics: 60
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{}, {}, {7,1}, {}, {0,6}, {5}, {8,4}, {3,9}, {2}, {}} : 44.0 : 0.38181818181818183
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 325.00157285914395
+Number of realized events: 93581
+Population size: 689
+Number of epidemics: 40
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{0}, {3,1}, {2}, {6}, {5}, {}, {4}} : 21.0 : 0.38095238095238093
+otherdist3: {{4,2}, {}, {3}, {1}, {5}, {0}, {6}} : 21.0 : 0.38095238095238093
+otherdist4: {{6}, {3}, {4}, {5}, {1}, {0}, {2}} : 22.0 : 0.36363636363636365
+otherdist5: {{2,4}, {3,1}, {0}, {5}, {}, {}, {6}} : 22.0 : 0.36363636363636365
 
 Observation number: 14
-Present instant: 700.0312345158657
-Number of realized events: 5466
-Population size: 28
-Number of epidemics: 65
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{4}, {}, {}, {}, {5,7,8}, {3}, {}, {6}, {1,0}, {9,2}} : 41.0 : 0.40975609756097564
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 350.00101244105815
+Number of realized events: 100544
+Population size: 614
+Number of epidemics: 43
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{0}, {3,1}, {2}, {6}, {5}, {}, {4}} : 21.0 : 0.38095238095238093
+otherdist3: {{4,2}, {}, {3}, {1}, {5}, {0}, {6}} : 21.0 : 0.38095238095238093
+otherdist4: {{4}, {0}, {3}, {1}, {5}, {2}, {6}} : 22.0 : 0.36363636363636365
+otherdist5: {{2,0}, {3}, {4}, {6}, {1}, {5}, {}} : 22.0 : 0.36363636363636365
 
 Observation number: 15
-Present instant: 750.4133851288891
-Number of realized events: 5970
-Population size: 12
-Number of epidemics: 72
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{3}, {5}, {1}, {7,6,0}, {4,8}, {9}, {}, {}, {2}, {}} : 40.0 : 0.42000000000000004
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 375.00024748792583
+Number of realized events: 108366
+Population size: 977
+Number of epidemics: 46
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{0}, {3,1}, {2}, {6}, {5}, {}, {4}} : 21.0 : 0.38095238095238093
+otherdist3: {{4,2}, {}, {3}, {1}, {5}, {0}, {6}} : 21.0 : 0.38095238095238093
+otherdist4: {{6}, {3}, {4,5}, {1}, {}, {0}, {2}} : 22.0 : 0.36363636363636365
+otherdist5: {{4}, {6}, {3,5}, {}, {1}, {2}, {0}} : 22.0 : 0.36363636363636365
 
 Observation number: 16
-Present instant: 800.0119391271089
-Number of realized events: 6321
-Population size: 27
-Number of epidemics: 76
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{1,5,6}, {4}, {9}, {}, {8,3}, {7}, {}, {}, {0}, {2}} : 46.0 : 0.3652173913043478
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 400.00123603613656
+Number of realized events: 115509
+Population size: 176
+Number of epidemics: 50
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{2}, {3,1}, {5,4}, {}, {}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{}, {1,3}, {5,4}, {6}, {}, {0}, {2}} : 20.0 : 0.4
+otherdist3: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist4: {{0}, {3,1}, {2}, {6}, {5}, {}, {4}} : 21.0 : 0.38095238095238093
+otherdist5: {{4,2}, {}, {3}, {1}, {5}, {0}, {6}} : 21.0 : 0.38095238095238093
 
 Observation number: 17
-Present instant: 850.1383647265482
-Number of realized events: 6696
-Population size: 18
-Number of epidemics: 81
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{8}, {0}, {}, {1,5}, {4}, {2,7}, {}, {6}, {}, {9,3}} : 46.0 : 0.3652173913043478
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 425.00092358121157
+Number of realized events: 122507
+Population size: 222
+Number of epidemics: 53
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{2}, {3,1}, {5,4}, {}, {}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{}, {1,3}, {5,4}, {6}, {}, {0}, {2}} : 20.0 : 0.4
+otherdist3: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist4: {{0}, {3,1}, {2}, {6}, {5}, {}, {4}} : 21.0 : 0.38095238095238093
+otherdist5: {{4,2}, {}, {3}, {1}, {5}, {0}, {6}} : 21.0 : 0.38095238095238093
 
 Observation number: 18
-Present instant: 900.0113594933999
-Number of realized events: 7070
-Population size: 21
-Number of epidemics: 85
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{0,7}, {}, {8,9}, {}, {}, {3}, {}, {4,6}, {5,1}, {2}} : 48.0 : 0.35000000000000003
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 450.00785121839226
+Number of realized events: 129659
+Population size: 296
+Number of epidemics: 56
+Best distribution of the patrols: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}}
+Empire policing time: 20.0
+Comfort: 0.4
+otherdist1: {{2}, {3,1}, {5,4}, {}, {}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{}, {1,3}, {5,4}, {6}, {}, {0}, {2}} : 20.0 : 0.4
+otherdist3: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist4: {{0}, {6,3}, {5,2}, {1}, {4}, {}, {}} : 21.0 : 0.38095238095238093
+otherdist5: {{0}, {3,1}, {2}, {6}, {5}, {}, {4}} : 21.0 : 0.38095238095238093
 
 Observation number: 19
-Present instant: 950.7127666390718
-Number of realized events: 7531
-Population size: 10
-Number of epidemics: 91
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{0}, {9}, {8}, {}, {3,6,5}, {}, {7,1,2,4}, {}, {}, {}} : 44.0 : 0.38181818181818183
-otherdist2: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 475.00257775638005
+Number of realized events: 136732
+Population size: 286
+Number of epidemics: 59
+Best distribution of the patrols: {{0}, {1,3}, {5,2}, {6}, {4}, {}, {}}
+Empire policing time: 19.0
+Comfort: 0.42105263157894735
+otherdist1: {{2}, {3,1}, {5}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{2}, {3,1}, {5,4}, {}, {}, {0}, {6}} : 20.0 : 0.4
+otherdist3: {{}, {1,3}, {5,4}, {6}, {}, {0}, {2}} : 20.0 : 0.4
+otherdist4: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist5: {{0}, {6,3}, {5,2}, {1}, {4}, {}, {}} : 21.0 : 0.38095238095238093
 
 Observation number: 20
-Present instant: 999.8455824752928
-Number of realized events: 7875
-Population size: 6
-Number of epidemics: 95
-Best distribution of the patrols: {{9}, {5}, {}, {4}, {3,0}, {}, {8}, {2,1}, {}, {6,7}}
-Empire policing time: 64.0
-Comfort: 0.56
-otherdist1: {{6}, {0}, {9,8}, {3}, {5}, {7}, {}, {1,2}, {}, {4}} : 44.0 : 0.38181818181818183
-otherdist2: {{8}, {7}, {}, {9,4}, {6,2,3}, {}, {1}, {0}, {}, {5}} : 48.0 : 0.35000000000000003
-otherdist3: {{8}, {}, {9}, {0}, {}, {}, {4}, {3,7,1,5,2}, {}, {6}} : 58.0 : 0.2896551724137931
-otherdist4: {{}, {8}, {}, {3,1,4}, {}, {2,7,9}, {5}, {}, {6}, {0}} : 62.0 : 0.2709677419354839
-otherdist5: {{}, {}, {0}, {6,1}, {9}, {}, {5,2}, {4,8}, {7}, {3}} : 100025.0 : 1.6795801049737565E-4
+Present instant: 499.99841566083796
+Number of realized events: 144004
+Population size: 400
+Number of epidemics: 62
+Best distribution of the patrols: {{0}, {1,3}, {5,2}, {6}, {4}, {}, {}}
+Empire policing time: 19.0
+Comfort: 0.42105263157894735
+otherdist1: {{2}, {3,1}, {5}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist2: {{2}, {3,1}, {5,4}, {}, {}, {0}, {6}} : 20.0 : 0.4
+otherdist3: {{}, {1,3}, {5,4}, {6}, {}, {0}, {2}} : 20.0 : 0.4
+otherdist4: {{}, {3,1}, {5,2}, {}, {4}, {0}, {6}} : 20.0 : 0.4
+otherdist5: {{0}, {6,3}, {5,2}, {1}, {4}, {}, {}} : 21.0 : 0.38095238095238093

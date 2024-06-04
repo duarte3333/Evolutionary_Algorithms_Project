@@ -162,18 +162,7 @@ public class Main {
             }
 
             updateBestIndividual();
-
-            if (!(bestIndividual.getPolicingTime() == bestIndividual.calculatePolicingTime())) {
-                System.out.println("******************Error in the best");
-            }
-
             updateCandidateDistributions();
-
-            for (Individual candidate : candidateDistributions) {
-                if (!(candidate.getPolicingTime() == candidate.calculatePolicingTime())) {
-                    System.out.println("******************Error in candidate distribution");
-                }
-            }
 
             nextIndividual = getNextIndividual();
 
