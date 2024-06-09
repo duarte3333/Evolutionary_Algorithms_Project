@@ -1,7 +1,5 @@
 ## Project overview
-This Java simulation uses evolutionary algorithms to find the best patrol distribution for a galactic empire. It simulates natural selection to evolve patrol allocations, minimizing time spent suppressing rebellions.  The simulation ensures diversity through reproduction, mutation, and even simulated epidemics!
-
-This project shows how such algorithms can solve complex scheduling problems in dynamic environments.
+This Java simulation uses evolutionary algorithms to find the best patrol distribution for a galactic empire. It simulates natural selection to evolve patrol allocations, minimizing time spent suppressing rebellions.  The simulation ensures diversity through reproduction, mutation, and even simulated epidemics. This project shows how such algorithms can solve complex scheduling problems in dynamic environments.
 
 ## What is an Evolutionary Algorithm?
 
