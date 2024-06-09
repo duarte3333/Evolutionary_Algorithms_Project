@@ -9,12 +9,12 @@ An evolutionary algorithm is a subset of evolutionary computation, a generic pop
 
 Key components of an evolutionary algorithm include:
 
-    Population: A collection of potential solutions to the problem.
-    Fitness Function: A function that quantifies how close a given solution is to the optimum.
-    Selection: The process of choosing individuals based on their fitness to produce offspring for the next generation.
-    Crossover (Recombination): A genetic operator used to combine the genetic information of two parents to generate new offspring.
-    Mutation: A genetic operator used to maintain genetic diversity from one generation of a population to the next.
-    Termination: A condition to stop the algorithm, which could be a fixed number of generations or a satisfactory fitness level.
+Population: A collection of potential solutions to the problem.
+Fitness Function: A function that quantifies how close a given solution is to the optimum.
+Selection: The process of choosing individuals based on their fitness to produce offspring for the next generation.
+Crossover (Recombination): A genetic operator used to combine the genetic information of two parents to generate new offspring.
+Mutation: A genetic operator used to maintain genetic diversity from one generation of a population to the next.
+Termination: A condition to stop the algorithm, which could be a fixed number of generations or a satisfactory fitness level.
 
 ## Problem Description
 
